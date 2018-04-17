@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d269fe1e48040?w=425&h=52&f=jpeg&s=15663">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d264ff674834f?w=470&h=75&f=jpeg&s=16607">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d26d65057e595?w=1118&h=666&f=jpeg&s=134186">
-<meta property="og:updated_time" content="2018-04-17T07:40:20.782Z">
+<meta property="og:updated_time" content="2018-04-17T07:48:52.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用阿里云的ecs服务器，创建ftp站点">
 <meta name="twitter:description" content="第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来 1、远程连接到服务器（我是mac上直接 ssh root@服务器IP地址 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的） 2、安装vsftpd 1yum install -y vsftpd">
@@ -224,6 +224,10 @@ passwd ftptest                     #修改ftptest用户密码
 <p><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d269fe1e48040?w=425&amp;h=52&amp;f=jpeg&amp;s=15663" alt=""><br>发现压根就没有vsftpd这个文件夹，呵~不懂说什么好😂<br>既然发现没有，那就自己建一个咯<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir vsftpd</span><br><span class="line">ls</span><br></pre></td></tr></table></figure></p>
 <p><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d264ff674834f?w=470&amp;h=75&amp;f=jpeg&amp;s=16607" alt=""></p>
 <p>好了 文件夹有了，在连接一次试试<br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d26d65057e595?w=1118&amp;h=666&amp;f=jpeg&amp;s=134186" alt=""><br>OK 大功告成！！</p>
+<p>补充：<br>记录一下vsftpd的命令<br>启动命令 systemctl start vsftpd.service<br>停止命令 systemctl stop vsftpd.service<br>重新启动 systemctl restart vsftpd.service<br>检查vsfepd服务的允许状态 systemctl status vsftpd.service</p>
+<p>卸载vsftp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa |grep vsftp</span><br></pre></td></tr></table></figure></p>
+<p>得到 vsftpd-3.0.2-22.el7.x86_64</p>
+<p>卸载点上面得到的那个vsftpd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e vsftpd-3.0.2-22.el7.x86_64</span><br></pre></td></tr></table></figure></p>
 
       
 
