@@ -6,15 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://hotao.io.com">
-  <title>HOTAO</title>
+  <title>使用阿里云的ecs服务器，创建ftp站点 | HOTAO</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="使用阿里云的ecs服务器，创建ftp站点。第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来 1、远程连接到服务器（我是mac上直接 ssh root@服务器IP地址 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的） 2、安装vsftpd 1yum install -y vsftpd">
+  <meta name="description" content="第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来 1、远程连接到服务器（我是mac上直接 ssh root@服务器IP地址 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的） 2、安装vsftpd 1yum install -y vsftpd">
 <meta name="keywords" content="rubbish">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HOTAO">
+<meta property="og:title" content="使用阿里云的ecs服务器，创建ftp站点">
 <meta property="og:url" content="http://hotao.io.com/2018/04/17/ftp/index.html">
 <meta property="og:site_name" content="HOTAO">
-<meta property="og:description" content="使用阿里云的ecs服务器，创建ftp站点。第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来 1、远程连接到服务器（我是mac上直接 ssh root@服务器IP地址 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的） 2、安装vsftpd 1yum install -y vsftpd">
+<meta property="og:description" content="第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来 1、远程连接到服务器（我是mac上直接 ssh root@服务器IP地址 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的） 2、安装vsftpd 1yum install -y vsftpd">
 <meta property="og:locale" content="zh">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d275a9c978386?w=577&h=72&f=jpeg&s=20267">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d276982288e2a?w=567&h=70&f=jpeg&s=18597">
@@ -28,10 +28,10 @@
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d269fe1e48040?w=425&h=52&f=jpeg&s=15663">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d264ff674834f?w=470&h=75&f=jpeg&s=16607">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d26d65057e595?w=1118&h=666&f=jpeg&s=134186">
-<meta property="og:updated_time" content="2018-04-17T07:37:38.816Z">
+<meta property="og:updated_time" content="2018-04-17T07:40:20.782Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HOTAO">
-<meta name="twitter:description" content="使用阿里云的ecs服务器，创建ftp站点。第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来 1、远程连接到服务器（我是mac上直接 ssh root@服务器IP地址 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的） 2、安装vsftpd 1yum install -y vsftpd">
+<meta name="twitter:title" content="使用阿里云的ecs服务器，创建ftp站点">
+<meta name="twitter:description" content="第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来 1、远程连接到服务器（我是mac上直接 ssh root@服务器IP地址 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的） 2、安装vsftpd 1yum install -y vsftpd">
 <meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d275a9c978386?w=577&h=72&f=jpeg&s=20267">
   
     <link rel="alternative" href="/atom.xml" title="HOTAO" type="application/atom+xml">
@@ -165,9 +165,24 @@
             <article id="post-ftp" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用阿里云的ecs服务器，创建ftp站点
+    </h1>
+  
+
+        
+        <a href="/2018/04/17/ftp/" class="archive-article-date">
+  	<time datetime="2018-04-17T03:48:36.826Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-17</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="使用阿里云的ecs服务器，创建ftp站点。"><a href="#使用阿里云的ecs服务器，创建ftp站点。" class="headerlink" title="使用阿里云的ecs服务器，创建ftp站点。"></a>使用阿里云的ecs服务器，创建ftp站点。</h2><p>第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来</p>
+        <p>第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来</p>
 <p>1、远程连接到服务器（我是mac上直接 <code>ssh root@服务器IP地址</code> 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的）</p>
 <p>2、安装vsftpd</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y vsftpd</span><br></pre></td></tr></table></figure>
