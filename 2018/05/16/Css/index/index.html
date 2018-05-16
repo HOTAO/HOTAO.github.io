@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="HOTAO">
 <meta property="og:description" content="1、使用 unset 而不是重置所有属性重置元素的属性时，不需要重置每个单独的属性 一般我们都是用覆盖的方式修改 css 的属性，例如： 12345678910111213141516/* 假如有这么一个button的样式 */button &amp;#123;  background: blue;  border: 1px solid red;  color: yellow;  padding: 50p">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2018-05-16T06:44:16.848Z">
+<meta property="og:updated_time" content="2018-05-16T07:36:34.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="好用，却不常用的css技巧">
 <meta name="twitter:description" content="1、使用 unset 而不是重置所有属性重置元素的属性时，不需要重置每个单独的属性 一般我们都是用覆盖的方式修改 css 的属性，例如： 12345678910111213141516/* 假如有这么一个button的样式 */button &amp;#123;  background: blue;  border: 1px solid red;  color: yellow;  padding: 50p">
@@ -172,6 +172,7 @@
         <h3 id="1、使用-unset-而不是重置所有属性"><a href="#1、使用-unset-而不是重置所有属性" class="headerlink" title="1、使用 unset 而不是重置所有属性"></a>1、使用 unset 而不是重置所有属性</h3><p>重置元素的属性时，不需要重置每个单独的属性</p>
 <p>一般我们都是用覆盖的方式修改 css 的属性，例如：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 假如有这么一个button的样式 */</span></span><br><span class="line"><span class="selector-tag">button</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: blue;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">  <span class="attribute">color</span>: yellow;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 重置button的样式 */</span></span><br><span class="line"><span class="selector-class">.button</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: none;</span><br><span class="line">  <span class="attribute">border</span>: none;</span><br><span class="line">  <span class="attribute">color</span>: inherit;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>你可以用 all 简写來指定所有元素的属性。 将该值设置为 unset 会将元素的属性更改为其初始值：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.button</span> &#123;</span><br><span class="line">  <span class="attribute">all</span>: unset;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>发现效果和上面的一样</p>
@@ -422,11 +423,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">快应用</a>
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
+                <a href="javascript:void(0)" class="js-tag color4">快应用</a>
               </li>
             
             <div class="clearfix"></div>
