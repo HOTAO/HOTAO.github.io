@@ -16,10 +16,12 @@
 <meta property="og:site_name" content="HOTAO">
 <meta property="og:description" content="1、使用 unset 而不是重置所有属性重置元素的属性时，不需要重置每个单独的属性 一般我们都是用覆盖的方式修改 css 的属性，例如： 12345678910111213141516/* 假如有这么一个button的样式 */button &amp;#123;  background: blue;  border: 1px solid red;  color: yellow;  padding: 50p">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2018-05-16T07:36:34.654Z">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/5/17/1636bf8b655e00a2?w=339&h=335&f=jpeg&s=15557">
+<meta property="og:updated_time" content="2018-05-17T02:49:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="好用，却不常用的css技巧">
 <meta name="twitter:description" content="1、使用 unset 而不是重置所有属性重置元素的属性时，不需要重置每个单独的属性 一般我们都是用覆盖的方式修改 css 的属性，例如： 12345678910111213141516/* 假如有这么一个button的样式 */button &amp;#123;  background: blue;  border: 1px solid red;  color: yellow;  padding: 50p">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/5/17/1636bf8b655e00a2?w=339&h=335&f=jpeg&s=15557">
   
     <link rel="alternative" href="/atom.xml" title="HOTAO" type="application/atom+xml">
   
@@ -187,6 +189,18 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 选择第 1 到 第 3 个元素显示出来*/</span></span><br><span class="line"><span class="selector-tag">li</span><span class="selector-pseudo">:nth-child(-n</span> + 3) &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>配合:not()可以试一下这个操作</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 选择除前3个元素之外的所有元素，并显示他们 */</span></span><br><span class="line"><span class="selector-tag">li</span><span class="selector-pseudo">:not(</span><span class="selector-pseudo">:nth-child(-n</span> + 3)) &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4、如何实现两栏布局中左右栏始终保持等高"><a href="#4、如何实现两栏布局中左右栏始终保持等高" class="headerlink" title="4、如何实现两栏布局中左右栏始终保持等高"></a>4、如何实现两栏布局中左右栏始终保持等高</h3><p>我们经常会遇到两栏的设计，设计图上是两边等高的。 但实际情况却总是会出现 左右两边的实际高度不一致，导致我们需要调高度</p>
+<p>张鑫旭有一篇文章有提到怎么处理 <a href="http://www.zhangxinxu.com/wordpress/2010/03/%E7%BA%AFcss%E5%AE%9E%E7%8E%B0%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%88%86%E6%A0%8F%E9%AB%98%E5%BA%A6%E8%87%AA%E5%8A%A8%E7%9B%B8%E7%AD%89/" target="_blank" rel="noopener">[纯 CSS 实现侧边栏/分栏高度自动相等]</a></p>
+<p>他的操作  是 需要保持适应的一栏做了特殊的处理，即：设置了一个非常大的<code>padding-bottom</code> 和 <code>margin-bottom</code> 比如他的文章里面写的：<code>padding-bottom: 3000</code> 和 <code>margin-bottom: -3000</code>，另外在这两栏的父元素设置<code>overflow: hidder</code></p>
+<font>文章发布于 2010 年，当时来说可能还算不错的解决方案，但现在已经是 2018 年啦，我们得学会新的骚操作才行啦</font>
+
+<p>在一次开发过程中发现，用 <code>display: flex</code> 来做布局的时候，可以很好的解决这个问题。</p>
+<p>那么现在来试一下 <code>display: flex</code> 吧</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.content</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: space-around;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.left</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#cca897</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.right</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#00bcd4</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：<br><img src="https://user-gold-cdn.xitu.io/2018/5/17/1636bf8b655e00a2?w=339&amp;h=335&amp;f=jpeg&amp;s=15557" alt=""></p>
+<p>如图：左边和右边的高度是一样的，代码上只对右边加了<code>height: 300px</code>，而左边没有做任何操作。但是却可以实现保持等高的效果</p>
+<p><code>display:flex</code> 布局真是个好东西 😝</p>
 
       
 
