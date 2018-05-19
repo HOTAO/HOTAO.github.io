@@ -150,6 +150,389 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Js/正则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/18/Js/正则/">这次一定要把正则安排的明明白白</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/18/Js/正则/" class="archive-article-date">
+  	<time datetime="2018-05-18T02:16:35.891Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1、首先是语法"><a href="#1、首先是语法" class="headerlink" title="1、首先是语法"></a>1、首先是语法</h3><p>常用的列举一下：</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\s</td>
+<td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任何<font color="red">非</font>空白字符，包括空格、制表符、换页符等等。等价于 [^ \f\n\r\t\v]</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配输入字符串的结尾位置</td>
+</tr>
+<tr>
+<td>( )</td>
+<td>标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 \( 和 \)。</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配字母、数字、下划线。等价于’[A-Za-z0-9_]’。</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>匹配<font color="red">非</font>字母、数字、下划线。等价于’[^A-Za-z0-9_]’。</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达式零次或多次。要匹配 * 字符，请使用 \*。</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次。要匹配 + 字符，请使用 \+。</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除换行符 \n 之外的任何单字符。要匹配 . ，请使用 \. 。</td>
+</tr>
+<tr>
+<td>[</td>
+<td>标记一个中括号表达式的开始。要匹配 [，请使用 \[。</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。要匹配 ? 字符，请使用 \?。</td>
+</tr>
+<tr>
+<td>\</td>
+<td>将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， ‘n’ 匹配字符 ‘n’。’\n’ 匹配换行符。序列 ‘\\‘ 匹配 “\“，而 ‘\(‘ 则匹配 “(“。</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配输入字符串的开始位置，<font color="red">除非在方括号表达式中使用，此时它表示不接受该字符集合</font>。要匹配 ^ 字符本身，请使用 \^。</td>
+</tr>
+<tr>
+<td>{</td>
+<td>标记限定符表达式的开始。要匹配 {，请使用 \{。</td>
+</tr>
+<tr>
+<td>\</td>
+<td></td>
+<td>指明两项之间的一个选择。要匹配 \</td>
+<td>，请使用 \\</td>
+<td>。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="–-划重点-–"><a href="#–-划重点-–" class="headerlink" title="++ – 划重点 – ++"></a>++ – 划重点 – ++</h3><p>干货来袭：</p>
+<p>1）*、+限定符都是贪婪的，因为它们会尽可能多的匹配文字，只有在它们的后面加上一个?就可以实现非贪婪或<font color="red">最小匹配</font>。<br>例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'&lt;H1&gt;Chapter 1 - 介绍正则表达式&lt;/H1&gt;'</span></span><br><span class="line">str.match(<span class="regexp">/&lt;.*&gt;/</span>)[<span class="number">0</span>] <span class="comment">// &lt;H1&gt;Chapter 1 - 介绍正则表达式&lt;/H1&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>解释一下，<code>/&lt;.*&gt;/</code> 的意思是 匹配 开头<code>&lt;</code> 和 <code>&gt;</code> 结尾 并且中间可以是任意个任意字符。因为使用了*好的原因，他默认是贪婪的，也就是说 默认会最大匹配</p>
+<p>如果我们要的只是<code>&lt;H1&gt;</code>这个字符串，那么我们只要加一个?就可以了，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'&lt;H1&gt;Chapter 1 - 介绍正则表达式&lt;/H1&gt;'</span></span><br><span class="line">str.match(<span class="regexp">/&lt;.*?&gt;/</span>)[<span class="number">0</span>] <span class="comment">// &lt;H1&gt;</span></span><br></pre></td></tr></table></figure>
+<p>*和+这两个限定符都是贪婪的，他们会尽可能多的匹配字符，只要在他们后面加上?就可以实现非贪婪或者说最小匹配</p>
+<p>2) 如何利用<code>（）</code>来对字符串进行分割<br>把url的协议、域名、端口和路径分解出来<br>例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"http://www.runoob.com:80/html/html-tutorial.html"</span>;</span><br><span class="line">str.match(<span class="regexp">/(\w+):\/\/([.\w]+):?(\d*)?[# ]*(.*)/</span>)</span><br></pre></td></tr></table></figure></p>
+<p>结果如下：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/5/18/1637162a38eb61ed?w=1037&amp;h=231&amp;f=jpeg&amp;s=56034" alt=""></p>
+<p>各个匹配项内容如下：</p>
+<ul>
+<li>第一个括号子表达式包含 “http”</li>
+<li>第二个括号子表达式包含 “<a href="http://www.runoob.com&quot;" target="_blank" rel="noopener">www.runoob.com&quot;</a></li>
+<li>第三个括号子表达式包含 “80”</li>
+<li><p>第四个括号子表达式包含 “/html/html-tutorial.html”</p>
+<p>网上有个比较隐晦的写法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.match(<span class="regexp">/(\w+):\/\/([^/:]+):?(\d*)?[# ]*(.*)/</span>)</span><br></pre></td></tr></table></figure>
+<p>第二个括号里的表达式匹配 : 和 / 之后的一个或多个字符<br>可以到达同样的效果</p>
+</li>
+</ul>
+<h4 id="3-、注意一下-中括号"><a href="#3-、注意一下-中括号" class="headerlink" title="3)、注意一下[]中括号"></a>3)、注意一下<code>[]</code>中括号</h4><p><code>.</code>是特殊字符，它的意义是 匹配出<code>\n</code>之外的所有字符，但是在<code>[.]</code>中括号里面到时候就只会匹配<code>.</code>,等价于<code>\.</code><br><code>^</code>也是特殊字符，它的意义是 匹配字符串开始的位置<br><code>[^]</code>当它出现在中括号里面的时候，表示非的意思，例如：<code>[^/:]</code> 表示 除了<code>/</code>和<code>:</code>以外的所有字符</p>
+<p>例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'a.aa:/d.dd:/c.cc'</span></span><br><span class="line">str.match(<span class="regexp">/[^/:.]+/g</span>)</span><br></pre></td></tr></table></figure></p>
+<p>结果如图<br><img src="https://user-gold-cdn.xitu.io/2018/5/18/16371fede7576409?w=355&amp;h=222&amp;f=jpeg&amp;s=24249" alt=""></p>
+<h3 id="4）、一些比较生僻的匹配表达式"><a href="#4）、一些比较生僻的匹配表达式" class="headerlink" title="4）、一些比较生僻的匹配表达式"></a>4）、一些比较生僻的匹配表达式</h3><p><code>\num</code>,num必须是一个正整数，它的意义是：对所获取的匹配的引用</p>
+<p>纯文字说老实话别说你理解不了了，我都写不出来…</p>
+<p>来个例子比较实在，一眼就懂:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'abbcddeffg'</span></span><br><span class="line">str.match(<span class="regexp">/(.)\1/g</span>)</span><br></pre></td></tr></table></figure></p>
+<p>解释一下：<br><code>(.)</code> 是匹配一个除 <code>\n</code> 以外任意字符，<code>\1</code> 表示第一个子匹配项，即是<code>(.)</code>所匹配的数据。<br>这里的结果是怎么来的呢？<br>按照验证规则是从左往右的顺序一个一个匹配:</p>
+<ul>
+<li><p><code>(.)</code>匹配到第一个字母，这个例子里第一个字母是a,那么此时<code>(.)</code>的匹配值是a，那么\1的值也是a， 这个时候正则近似于 /aa/，所以这个时候没有相匹配的成功</p>
+</li>
+<li><p>继续匹配下去，<code>(.)</code>此时是b，那么相应的<code>\1</code>也是b，这个时候正则近似于 <code>/bb/</code>，匹配成功</p>
+</li>
+<li><p>因为有表达式后面加了g，所以会一直匹配下去，最好的返回值就是<code>[&quot;bb&quot;,&quot;cc&quot;,&quot;dd&quot;]</code></p>
+</li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2018/5/18/163728baed5f617d?w=352&amp;h=146&amp;f=jpeg&amp;s=19238" alt=""></p>
+<p>补充：<code>?:</code>的作用: 不想被捕获的时候使用 可以提高程序执行速度<br>例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'123 abc 567'</span></span><br><span class="line"><span class="keyword">var</span> rex = <span class="regexp">/(\d+) (\w+) (\d+)/</span></span><br><span class="line">str.replace(rex, <span class="string">'$3 $2 $1'</span>) <span class="comment">// "567 abc 123"</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看出，<code>$1</code> 对应 <code>123</code>即对应第一个括号， <code>$2</code> 对应 <code>abc</code>即对应第二个括号， <code>$3</code> 对应<code>567</code>即对应第三个括号</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'123 abc 567'</span></span><br><span class="line"><span class="keyword">var</span> rex = <span class="regexp">/(?:\d+) (?:\w+) (\d+)/</span></span><br><span class="line">str.replace(rex, <span class="string">'$3 $2 $1'</span>) <span class="comment">// "$3 $2 567"</span></span><br></pre></td></tr></table></figure>
+<p>第一个和第二个括号里面加上了<code>?:</code>，这样的话 第一第二个括号就不会被捕获了，这个时候的$1对应的是第三个括号，因为它没有加<code>?:</code></p>
+<hr>
+<h2 id="常用验证规则："><a href="#常用验证规则：" class="headerlink" title="常用验证规则："></a>常用验证规则：</h2><ul>
+<li><p>用户密码：（只包含字母数字，8-10位）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[a-zA-Z0<span class="number">-9</span>]&#123;<span class="number">8</span>,<span class="number">10</span>&#125;$/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>只能输入中文</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[\u4E00-\u9FA5]+$/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>邮箱验证</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^\w+@\w+\.\w&#123;<span class="number">2</span>,<span class="number">4</span>&#125;/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>URL地址验证</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^https?:\/\/(\w+\.)+\w&#123;2,4&#125;\/[#?/%&amp;=.-\w]*$/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>练练手：捕获html标签内的内容<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> re = <span class="regexp">/^&lt;.+&gt;(.+)&lt;\/.+&gt;$/</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">'&lt;a alog-action="qb-username" class="user-name" rel="nofollow" href="/demo" target="_blank"&gt;imkow&lt;/a&gt;'</span></span><br><span class="line">a.match(re) <span class="comment">// imkow</span></span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/18/Js/正则/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Css/index" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Two-way-data-binding</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <input type="text" v-model="text"> 
+  </div>
+
+  <script>
+    function observe(obj, vm) {
+      Object.keys(obj).forEach(function (key) {
+        defineReactive(vm, key, obj[key]);
+      })
+    }
+    function defineReactive(obj, key, val) {
+      var dep = new Dep();
+      Object.defineProperty(obj, key, {
+        get: function () {
+          // 添加订阅者 watcher 到主题对象 Dep
+          if (Dep.target) dep.addSub(Dep.target);
+          return val
+        },
+        set: function (newVal) {
+          if (newVal === val) return
+          val = newVal;
+          // 作为发布者发出通知
+          dep.notify();
+        }
+      });
+    }
+    function nodeToFragment(node, vm) {
+      var flag = document.createDocumentFragment();
+      var child;
+      // 许多同学反应看不懂这一段，这里有必要解释一下
+      // 首先，所有表达式必然会返回一个值，赋值表达式亦不例外
+      // 理解了上面这一点，就能理解 while (child = node.firstChild) 这种用法
+      // 其次，appendChild 方法有个隐蔽的地方，就是调用以后 child 会从原来 DOM 中移除
+      // 所以，第二次循环时，node.firstChild 已经不再是之前的第一个子元素了
+      while (child = node.firstChild) {
+        compile(child, vm);
+        flag.appendChild(child); // 将子节点劫持到文档片段中
+      }
+      return flag
+    }
+    function compile(node, vm) {
+      var reg = /\{\{(.*)\}\}/;
+      // 节点类型为元素
+      if (node.nodeType === 1) {
+        var attr = node.attributes;
+        // 解析属性
+        for (var i = 0; i < attr.length; i++) {
+          if (attr[i].nodeName == 'v-model') {
+            var name = attr[i].nodeValue; // 获取 v-model 绑定的属性名
+            node.addEventListener('input', function (e) {
+              // 给相应的 data 属性赋值，进而触发该属性的 set 方法
+              vm[name] = e.target.value;
+            });
+            node.value = vm[name]; // 将 data 的值赋给该 node
+            node.removeAttribute('v-model');
+          }
+        };
+        new Watcher(vm, node, name, 'input');
+      }
+      // 节点类型为 text
+      if (node.nodeType === 3) {
+        if (reg.test(node.nodeValue)) {
+          var name = RegExp.$1; // 获取匹配到的字符串
+          name = name.trim();
+          new Watcher(vm, node, name, 'text');
+        }
+      }
+    }
+    function Watcher(vm, node, name, nodeType) {
+      Dep.target = this;
+      this.name = name;
+      this.node = node;
+      this.vm = vm;
+      this.nodeType = nodeType;
+      this.update();
+      Dep.target = null;
+    }
+    Watcher.prototype = {
+      update: function () {
+        this.get();
+        if (this.nodeType == 'text') {
+          this.node.nodeValue = this.value;
+        }
+        if (this.nodeType == 'input') {
+          this.node.value = this.value;
+        }
+      },
+      // 获取 data 中的属性值
+      get: function () {
+        this.value = this.vm[this.name]; // 触发相应属性的 get
+      }
+    }
+    function Dep() {
+      this.subs = []
+    }
+    Dep.prototype = {
+      addSub: function (sub) {
+        this.subs.push(sub);
+      },
+      notify: function () {
+        this.subs.forEach(function (sub) {
+          sub.update();
+        });
+      }
+    }
+    function Vue(options) {
+      this.data = options.data;
+      var data = this.data;
+      observe(data, this);
+      var id = options.el;
+      var dom = nodeToFragment(document.getElementById(id), this);
+      // 编译完成后，将 dom 返回到 app 中
+      document.getElementById(id).appendChild(dom);
+    }
+    var vm = new Vue({
+      el: 'app',
+      data: {
+        text: 'hello world'
+      }
+    })
+  </script>
+</body>
+
+</html>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/17/Css/index/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Css/index" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -848,11 +1231,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
