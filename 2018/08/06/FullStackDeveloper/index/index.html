@@ -6,34 +6,40 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://hotao.io.com">
-  <title>使用阿里云的ecs服务器，创建ftp站点 | HOTAO</title>
+  <title>node + koa + mysql + vue做一个公司内部需求网站 | HOTAO</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来 1、远程连接到服务器（我是mac上直接 ssh root@服务器IP地址 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的） 2、安装vsftpd 1yum install -y vsftpd">
-<meta name="keywords" content="rubbish">
+  <meta name="description" content="前言用 node 作为后端支持已经比较成熟了，很早以前就想自己动手，从零开始，前端+后端+数据库+部署都自己操作。 最近刚好 PM 想要一个公司内部的需求网站，并且公司的后端大佬们，没时间来写接口。😝 那就让我们动起手来，就有了这个项目。  #前置技能：  本项目，难度不大，只需要稍微花一点时间和有一点耐心，就可以掌握。 涉及的技术点和需要了解掌握的的技术如下：（就是要看文档啦~，痛苦的一匹）">
+<meta name="keywords" content="全栈">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用阿里云的ecs服务器，创建ftp站点">
-<meta property="og:url" content="http://hotao.io.com/2018/04/17/ftp/index.html">
+<meta property="og:title" content="node + koa + mysql + vue做一个公司内部需求网站">
+<meta property="og:url" content="http://hotao.io.com/2018/08/06/FullStackDeveloper/index/index.html">
 <meta property="og:site_name" content="HOTAO">
-<meta property="og:description" content="第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来 1、远程连接到服务器（我是mac上直接 ssh root@服务器IP地址 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的） 2、安装vsftpd 1yum install -y vsftpd">
+<meta property="og:description" content="前言用 node 作为后端支持已经比较成熟了，很早以前就想自己动手，从零开始，前端+后端+数据库+部署都自己操作。 最近刚好 PM 想要一个公司内部的需求网站，并且公司的后端大佬们，没时间来写接口。😝 那就让我们动起手来，就有了这个项目。  #前置技能：  本项目，难度不大，只需要稍微花一点时间和有一点耐心，就可以掌握。 涉及的技术点和需要了解掌握的的技术如下：（就是要看文档啦~，痛苦的一匹）">
 <meta property="og:locale" content="zh">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d275a9c978386?w=577&h=72&f=jpeg&s=20267">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d276982288e2a?w=567&h=70&f=jpeg&s=18597">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d23796ccfff59?w=901&h=89&f=jpeg&s=27089">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d239cbd88903a?w=935&h=225&f=jpeg&s=38819">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d23e42d79647e?w=641&h=260&f=jpeg&s=19245">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d249e0049b831?w=579&h=56&f=jpeg&s=21610">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d24dec83d5ae4?w=1241&h=360&f=jpeg&s=83590">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d25b1d1a480a0?w=355&h=365&f=jpeg&s=49164">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d25df8fa5f9ae?w=872&h=285&f=jpeg&s=47986">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d269fe1e48040?w=425&h=52&f=jpeg&s=15663">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d264ff674834f?w=470&h=75&f=jpeg&s=16607">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d26d65057e595?w=1118&h=666&f=jpeg&s=134186">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d3019422d68ba?w=802&h=266&f=jpeg&s=69481">
-<meta property="og:updated_time" content="2018-04-17T09:53:32.567Z">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e3db3b307e63?w=626&h=498&f=png&s=81123">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e9d3106f0048?w=710&h=444&f=png&s=100365">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e4b28bcecb67?w=627&h=200&f=png&s=29550">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e4f716ca65e0?w=847&h=1061&f=png&s=185770">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e58153934fd6?w=860&h=582&f=png&s=97483">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e9c2b85c4e0c?w=774&h=766&f=png&s=180135">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e8d25912202d?w=754&h=414&f=png&s=67920">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e9f74ed5b4aa?w=874&h=1128&f=png&s=250737">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650ebd539821793?w=799&h=284&f=png&s=59997">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650ebed0079e2a0?w=831&h=805&f=png&s=166246">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650ebf60ccc60f0?w=799&h=1029&f=png&s=177941">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650eca3b4a3480a?w=331&h=274&f=png&s=35306">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650ecb590fec672?w=720&h=766&f=png&s=85199">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650ecbb92ecf52e?w=720&h=710&f=png&s=80102">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650dff656bcf92c?w=534&h=750&f=png&s=81941">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e0b4d0f91c7e?w=597&h=1067&f=png&s=146773">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e0f0f13b6e7a?w=828&h=724&f=png&s=115360">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e122858f27cf?w=510&h=375&f=png&s=50218">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e179f8a5ebe6?w=432&h=262&f=png&s=25440">
+<meta property="og:updated_time" content="2018-08-06T10:38:35.174Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用阿里云的ecs服务器，创建ftp站点">
-<meta name="twitter:description" content="第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来 1、远程连接到服务器（我是mac上直接 ssh root@服务器IP地址 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的） 2、安装vsftpd 1yum install -y vsftpd">
-<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d275a9c978386?w=577&h=72&f=jpeg&s=20267">
+<meta name="twitter:title" content="node + koa + mysql + vue做一个公司内部需求网站">
+<meta name="twitter:description" content="前言用 node 作为后端支持已经比较成熟了，很早以前就想自己动手，从零开始，前端+后端+数据库+部署都自己操作。 最近刚好 PM 想要一个公司内部的需求网站，并且公司的后端大佬们，没时间来写接口。😝 那就让我们动起手来，就有了这个项目。  #前置技能：  本项目，难度不大，只需要稍微花一点时间和有一点耐心，就可以掌握。 涉及的技术点和需要了解掌握的的技术如下：（就是要看文档啦~，痛苦的一匹）">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e3db3b307e63?w=626&h=498&f=png&s=81123">
   
     <link rel="alternative" href="/atom.xml" title="HOTAO" type="application/atom+xml">
   
@@ -163,77 +169,103 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ftp" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-FullStackDeveloper/index" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      使用阿里云的ecs服务器，创建ftp站点
+      node + koa + mysql + vue做一个公司内部需求网站
     </h1>
   
 
         
-        <a href="/2018/04/17/ftp/" class="archive-article-date">
-  	<time datetime="2018-04-17T03:48:36.826Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-17</time>
+        <a href="/2018/08/06/FullStackDeveloper/index/" class="archive-article-date">
+  	<time datetime="2018-08-06T03:06:58.597Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来</p>
-<p>1、远程连接到服务器（我是mac上直接 <code>ssh root@服务器IP地址</code> 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的）</p>
-<p>2、安装vsftpd</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y vsftpd</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>3、运行一下命令，并查看<code>etc/vsftpd</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/vsftpd</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
-<p><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d275a9c978386?w=577&amp;h=72&amp;f=jpeg&amp;s=20267" alt=""><br>4、运行以下命令设置开机自启动。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable vsftpd.service</span><br></pre></td></tr></table></figure></p>
-<p>5、运行以下命令启动 FTP 服务。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start vsftpd.service</span><br></pre></td></tr></table></figure>
-<p>6、运行以下命令查看 FTP 服务端口。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -antup | grep ftp</span><br></pre></td></tr></table></figure>
-<p><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d276982288e2a?w=567&amp;h=70&amp;f=jpeg&amp;s=18597" alt=""></p>
-<p>这个时候已经可以连接啦~~~（匿名连接）</p>
-<p>（我用的是 fileZilla）<br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d23796ccfff59?w=901&amp;h=89&amp;f=jpeg&amp;s=27089" alt=""></p>
-<p>点快速连接，可以看到连接成功，并且列出了“/”目录。其实就是：/var/ftp/ 目录<br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d239cbd88903a?w=935&amp;h=225&amp;f=jpeg&amp;s=38819" alt=""><br>vsftpd的默认根目录为：/var/ftp/pub<br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d23e42d79647e?w=641&amp;h=260&amp;f=jpeg&amp;s=19245" alt=""></p>
-<h3 id="匿名ftp的设置"><a href="#匿名ftp的设置" class="headerlink" title="匿名ftp的设置"></a>匿名ftp的设置</h3><p>出于安全方面的考虑，vsftpd在默认情况下不允许用户通过匿名FTP上传文件，创建目录等更改操作，但是可以修改vsftpd.conf配置文件的选项，可以赋予匿名ftp更多的权限。(<strong>不信可以随便拖个文件过去pub文件夹</strong>)</p>
-<p>1、 允许匿名ftp上传文件。</p>
-<p>  修改/etc/vsftpd/vsftpd.conf</p>
-<pre><code>`write_enable=YES`
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>用 node 作为后端支持已经比较成熟了，很早以前就想自己动手，从零开始，前端+后端+数据库+部署都自己操作。 最近刚好 PM 想要一个公司内部的需求网站，并且公司的后端大佬们，没时间来写接口。😝 那就让我们动起手来，就有了这个项目。</p>
+<hr>
+<p>#前置技能：</p>
+<hr>
+<p>本项目，难度不大，只需要稍微花一点时间和有一点耐心，就可以掌握。</p>
+<p>涉及的技术点和需要了解掌握的的技术如下：（就是要看文档啦~，痛苦的一匹）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">后端：</span><br><span class="line">  node            （只是用了node的环境，基本上没有它什么事）</span><br><span class="line">  koa             （基于koa搭建后端服务，提供api）</span><br><span class="line">  koa-router      （koa的路由中间件）</span><br><span class="line">  koa-bodyparser  （处理koa POST请求参数 的中间件）</span><br><span class="line">  koa-cors        （处理跨域问题的中间件）</span><br><span class="line">  mysql           （数据库，没啥好说的）</span><br><span class="line"></span><br><span class="line">前端：</span><br><span class="line">  vue             （基于vue搭建的后端服务）</span><br><span class="line">  vue-router      （vue-cli搭建的时候选一下就好了）</span><br><span class="line">  axios           （ajax请求库）</span><br><span class="line">  element-ui      （UI库）</span><br></pre></td></tr></table></figure>
+<p>#项目结构</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">└──needs</span><br><span class="line">    ├── client                （前端项目）</span><br><span class="line">    │   ├── build               （vue-cli生成，项目配置）</span><br><span class="line">    │   ├── config              （vue-cli生成，项目配置）</span><br><span class="line">    │   ├── src</span><br><span class="line">    │   │   └── api             （api地址）</span><br><span class="line">    │   │   └── assets          （静态资源）</span><br><span class="line">    │   │   └── components      （公共组件）</span><br><span class="line">    │   │   └── router          （路由）</span><br><span class="line">    │   │   └── style           （公共样式）</span><br><span class="line">    │   │   └── views           （各页面）</span><br><span class="line">    │   │   └── App.vue         （页面入口）</span><br><span class="line">    │   │   └── elementUI.js    （按需加载elementUI)</span><br><span class="line">    │   │   └── main.js         （程序入口）</span><br><span class="line">    │   ├── needs              (需求上传地址)</span><br><span class="line">    ├── server                （后端项目）</span><br><span class="line">    │   ├── contorllers         （控制器）</span><br><span class="line">    │   ├── models              （数据层）</span><br><span class="line">    │   ├── routers             （路由）</span><br><span class="line">    │   ├── util                （工具）</span><br><span class="line">    │   ├── app.js              （项目入口）</span><br><span class="line">    └── readme.md</span><br></pre></td></tr></table></figure>
+<hr>
+<p>#后端代码实现</p>
+<hr>
+<p>后端接口的具体工作流程如下：</p>
+<pre><code>访问 api 地址
 
-`anon_upload_enable=YES`
-</code></pre><p>2、更改/var/ftp/pub目录的权限，为ftp用户添加写权限，并重新加载配置文件</p>
-<pre><code>chmod o+w /var/ftp/pub/                     #更改/var/ftp/pub目录的权限
-systemctl restart vsftpd.service            #重启ftp服务
-</code></pre><p><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d249e0049b831?w=579&amp;h=56&amp;f=jpeg&amp;s=21610" alt=""></p>
-<p>3、测试一下，拖个图片过去pub文件夹，OK了~~<br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d24dec83d5ae4?w=1241&amp;h=360&amp;f=jpeg&amp;s=83590" alt=""></p>
-<h3 id="配置本地用户登录"><a href="#配置本地用户登录" class="headerlink" title="配置本地用户登录"></a>配置本地用户登录</h3><p>本地用户登录就是指使用Linux操作系统中的用户账号和密码登录ftp服务器，vsftp安装后默只支持匿名ftp登录，用户如果试图使用Linux操作系统中的账号登录服务器，将会被vsftpd拒绝(<strong>这句话抄的，说实话，看得很拗口，可以不看的~~~直接跟着下面的步骤走….</strong>)</p>
-<p>1、本地创建一个账号密码来登录ftp（ftphest就是你的用户名，你想怎么起就怎么起）</p>
-<pre><code>useradd ftptest                    #创建ftptest用户
-passwd ftptest                     #修改ftptest用户密码
-</code></pre><p>2、修改/etc/vsftpd/vsftpd.conf</p>
-<p><code>anonymous enable=NO</code></p>
-<p><code>local_enable=YES</code><br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d25b1d1a480a0?w=355&amp;h=365&amp;f=jpeg&amp;s=49164" alt=""></p>
-<p>3、用这个上面设置的账号密码来链接ftp，不出意外，你会看到这个（反正我是看到了，如果你的没有，是正常连接，当我什么都没说）<br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d25df8fa5f9ae?w=872&amp;h=285&amp;f=jpeg&amp;s=47986" alt=""></p>
-<p>4、遇到上面这个问题，别去百度了，太**坑了😭</p>
-<p>怎么办呢？注意500那行，有个地址 <code>/home/vsftpd</code></p>
-<p>那就到home目录下看看</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
-<p><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d269fe1e48040?w=425&amp;h=52&amp;f=jpeg&amp;s=15663" alt=""><br>发现压根就没有vsftpd这个文件夹，呵~不懂说什么好😂<br>既然发现没有，那就自己建一个咯<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir vsftpd</span><br><span class="line">ls</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d264ff674834f?w=470&amp;h=75&amp;f=jpeg&amp;s=16607" alt=""></p>
-<p>好了 文件夹有了，在连接一次试试<br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d26d65057e595?w=1118&amp;h=666&amp;f=jpeg&amp;s=134186" alt=""><br>OK 大功告成！！</p>
-<p>补充：如果发生如下情况，请执行 <code>sudo chmod -R 777 /home/vsftpd</code>，设置/home/vsftpd 的权限就可以了<br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d3019422d68ba?w=802&amp;h=266&amp;f=jpeg&amp;s=69481" alt=""></p>
-<h3 id="记录一下vsftpd的命令"><a href="#记录一下vsftpd的命令" class="headerlink" title="记录一下vsftpd的命令"></a>记录一下vsftpd的命令</h3><p>启动命令 <code>systemctl start vsftpd.service</code></p>
-<p>停止命令 <code>systemctl stop vsftpd.service</code></p>
-<p>重新启动 <code>systemctl restart vsftpd.service</code></p>
-<p>检查vsfepd服务的允许状态 <code>systemctl status vsftpd.service</code></p>
-<p>卸载vsftp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa |grep vsftp</span><br></pre></td></tr></table></figure></p>
-<p>得到 vsftpd-3.0.2-22.el7.x86_64</p>
-<p>执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e vsftpd-3.0.2-22.el7.x86_64</span><br></pre></td></tr></table></figure>
+&gt;&gt;&gt; 在 routers 里面对应 api 地址，调用回调函数
+
+&gt;&gt;&gt; 在 controllers 里面响应回调，调用操作数据库函数
+
+&gt;&gt;&gt; 在 models 里面实现了操作数据库的函数，通过 util
+    里面封装的数据库操作方法，完成对数据库的读写操作，
+    并返回相应数据。
+</code></pre><p>1、后端入口文件：<code>server/app.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e3db3b307e63?w=626&amp;h=498&amp;f=png&amp;s=81123" alt=""></p>
+<p>引入 koa 已经相关中间件，new 一个 koa 对象 app，使用 app.use 进行加载各个中间件并监听 3000 端口。<br>这样的话，对外暴露的就是 3000 端口，等路由和数据库操作部分操作完，就可以通过 <code>http://localhost:3000/+路由地址</code>进行接口请求</p>
+<p>2、路由文件：<br><code>server/router/api.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e9d3106f0048?w=710&amp;h=444&amp;f=png&amp;s=100365" alt=""></p>
+<p><code>server/router/index.js</code><br><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e4b28bcecb67?w=627&amp;h=200&amp;f=png&amp;s=29550" alt=""></p>
+<p>引入 koa-router，根据文档编写接口，并导出接口</p>
+<p>3、MySQL 数据库</p>
+<p>主要代码：<code>server/util/db.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e4f716ca65e0?w=847&amp;h=1061&amp;f=png&amp;s=185770" alt=""></p>
+<p>引入 mysql，通过 mysql.createPool 简历连接池，编写一个 query 方法用以执行 sql 语句。<br>pool.getConnection 创建数据  库链接，通过回调中的链接上下文 connection 中的 query 方法执行 sql 语句，执行完毕就释放连接池</p>
+<p> 自定义数据库操作方法：<code>server/util/dbMethods.js</code><br><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e58153934fd6?w=860&amp;h=582&amp;f=png&amp;s=97483" alt=""></p>
+<p>4、编写控制器</p>
+<p><code>server/controllers/needs.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e9c2b85c4e0c?w=774&amp;h=766&amp;f=png&amp;s=180135" alt=""></p>
+<p><code>server/controllers/user.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e8d25912202d?w=754&amp;h=414&amp;f=png&amp;s=67920" alt=""></p>
+<p>对应路由文件里面的回调函数，</p>
+<font color="red" size="1">注：我已经写好了。所以截图里面的各个方法里面已经有代码了。正常来说，是定义一个和路由文件里面的回调函数同名的方法，然后去 models 里面定义相关的数据库操作，然后在回到 controllers 里面调用 models 里面的操作。</font>
+
+<p>5、编写 models</p>
+<p><code>server/models/needs.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e9f74ed5b4aa?w=874&amp;h=1128&amp;f=png&amp;s=250737" alt=""></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ebd539821793?w=799&amp;h=284&amp;f=png&amp;s=59997" alt=""></p>
+<p><code>server/models/needs.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ebed0079e2a0?w=831&amp;h=805&amp;f=png&amp;s=166246" alt=""></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ebf60ccc60f0?w=799&amp;h=1029&amp;f=png&amp;s=177941" alt=""></p>
+<hr>
+<p>#数据库</p>
+<hr>
+<p>本项目需要两个表</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650eca3b4a3480a?w=331&amp;h=274&amp;f=png&amp;s=35306" alt=""></p>
+<p>needs 表：<br><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ecb590fec672?w=720&amp;h=766&amp;f=png&amp;s=85199" alt=""></p>
+<p>user 表：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ecbb92ecf52e?w=720&amp;h=710&amp;f=png&amp;s=80102" alt=""></p>
+<hr>
+<p>#前端代码实现</p>
+<hr>
+<p>1、采用 vue-cli 直接生成 vue 的模板项目,安装依赖并跑起来</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack needs</span><br><span class="line"></span><br><span class="line">cd needs</span><br><span class="line"></span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+<p>2、 编写路由文件</p>
+<p>路由文件：<code>client/src/router/index.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650dff656bcf92c?w=534&amp;h=750&amp;f=png&amp;s=81941" alt=""></p>
+<p>3、页面编写，代码比较多久不贴了，<a href="https://github.com/HOTAO/needs/tree/master/client/src/views" target="_blank" rel="noopener">github 上看吧</a></p>
+<p>4、api 对接</p>
+<p>axios 配置文件：<code>client/src/api/axios.js</code><br>主要是，接口地址以及对请求的拦截</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e0b4d0f91c7e?w=597&amp;h=1067&amp;f=png&amp;s=146773" alt=""></p>
+<p>需求相关的接口：<code>client/src/api/modules/needs.js</code><br><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e0f0f13b6e7a?w=828&amp;h=724&amp;f=png&amp;s=115360" alt=""></p>
+<p>用户相关的接口：<code>client/src/api/modules/user.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e122858f27cf?w=510&amp;h=375&amp;f=png&amp;s=50218" alt=""></p>
+<p>api 的的入口文件：<code>client/src/api/index.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e179f8a5ebe6?w=432&amp;h=262&amp;f=png&amp;s=25440" alt=""></p>
+<p> 前端部分比较简单，需要讲的不多，相信大佬们要写一个出来，也是分分钟的事~</p>
+<p><a href="https://github.com/HOTAO/needs/tree/master/client" target="_blank" rel="noopener">完整代码移步到 github</a></p>
+
       
 
       
@@ -262,6 +294,17 @@ passwd ftptest                     #修改ftptest用户密码
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">全栈</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -312,7 +355,7 @@ passwd ftptest                     #修改ftptest用户密码
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://hotao.io.com/2018/04/17/ftp/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://hotao.io.com/2018/08/06/FullStackDeveloper/index/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -326,18 +369,9 @@ passwd ftptest                     #修改ftptest用户密码
   
 <nav id="article-nav">
   
-    <a href="/2018/05/15/Js/奇技淫巧/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          js的奇技淫巧,一些提高代码逼格的操作（谁也别想动我的代码）
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/04/12/quickApp/followMe2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">快应用之手摸手，跟我走（2）</div>
+    <a href="/2018/06/05/Vue/vue/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">js细节知识点，这次好好写一下，不要在等到用时再去baidu了</div>
       <i class="icon-circle-right"></i>
     </a>
   

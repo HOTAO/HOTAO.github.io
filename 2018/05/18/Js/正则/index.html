@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/5/18/1637162a38eb61ed?w=1037&h=231&f=jpeg&s=56034">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/5/18/16371fede7576409?w=355&h=222&f=jpeg&s=24249">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/5/18/163728baed5f617d?w=352&h=146&f=jpeg&s=19238">
-<meta property="og:updated_time" content="2018-05-19T08:19:27.559Z">
+<meta property="og:updated_time" content="2018-08-06T01:59:48.271Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="这次一定要把正则安排的明明白白">
 <meta name="twitter:description" content="以前每次设计正则就去百度，说不会正则吧也不是全都不会，说会正则吧，又他喵的写不出来。这次，老子就要把正则给安排得明明白白的（手动滑稽）">
@@ -303,6 +303,10 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^https?:\/\/(\w+\.)+\w&#123;2,4&#125;\/[#?/%&amp;=.-\w]*$/</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<ul>
+<li>获取url参数<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> urlParamsData</span><br><span class="line">location.search.replace(<span class="regexp">/(\w+)=([\w-=]+)/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">  that.urlParamsData[b] = c</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <p>练练手：捕获html标签内的内容<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> re = <span class="regexp">/^&lt;.+&gt;(.+)&lt;\/.+&gt;$/</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">'&lt;a alog-action="qb-username" class="user-name" rel="nofollow" href="/demo" target="_blank"&gt;imkow&lt;/a&gt;'</span></span><br><span class="line">a.match(re) <span class="comment">// imkow</span></span><br></pre></td></tr></table></figure></p>
 
       
@@ -407,6 +411,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/05/22/Js/js细节知识点/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          js细节知识点
+        
+      </div>
+    </a>
   
   
     <a href="/2018/05/16/Css/index/" id="article-nav-older" class="article-nav-link-wrap">
@@ -532,11 +545,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">全栈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">

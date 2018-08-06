@@ -150,6 +150,313 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-FullStackDeveloper/index" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/06/FullStackDeveloper/index/">node + koa + mysql + vue做一个公司内部需求网站</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/06/FullStackDeveloper/index/" class="archive-article-date">
+  	<time datetime="2018-08-06T03:06:58.597Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>用 node 作为后端支持已经比较成熟了，很早以前就想自己动手，从零开始，前端+后端+数据库+部署都自己操作。 最近刚好 PM 想要一个公司内部的需求网站，并且公司的后端大佬们，没时间来写接口。😝 那就让我们动起手来，就有了这个项目。</p>
+<hr>
+<p>#前置技能：</p>
+<hr>
+<p>本项目，难度不大，只需要稍微花一点时间和有一点耐心，就可以掌握。</p>
+<p>涉及的技术点和需要了解掌握的的技术如下：（就是要看文档啦~，痛苦的一匹）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">后端：</span><br><span class="line">  node            （只是用了node的环境，基本上没有它什么事）</span><br><span class="line">  koa             （基于koa搭建后端服务，提供api）</span><br><span class="line">  koa-router      （koa的路由中间件）</span><br><span class="line">  koa-bodyparser  （处理koa POST请求参数 的中间件）</span><br><span class="line">  koa-cors        （处理跨域问题的中间件）</span><br><span class="line">  mysql           （数据库，没啥好说的）</span><br><span class="line"></span><br><span class="line">前端：</span><br><span class="line">  vue             （基于vue搭建的后端服务）</span><br><span class="line">  vue-router      （vue-cli搭建的时候选一下就好了）</span><br><span class="line">  axios           （ajax请求库）</span><br><span class="line">  element-ui      （UI库）</span><br></pre></td></tr></table></figure>
+<p>#项目结构</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">└──needs</span><br><span class="line">    ├── client                （前端项目）</span><br><span class="line">    │   ├── build               （vue-cli生成，项目配置）</span><br><span class="line">    │   ├── config              （vue-cli生成，项目配置）</span><br><span class="line">    │   ├── src</span><br><span class="line">    │   │   └── api             （api地址）</span><br><span class="line">    │   │   └── assets          （静态资源）</span><br><span class="line">    │   │   └── components      （公共组件）</span><br><span class="line">    │   │   └── router          （路由）</span><br><span class="line">    │   │   └── style           （公共样式）</span><br><span class="line">    │   │   └── views           （各页面）</span><br><span class="line">    │   │   └── App.vue         （页面入口）</span><br><span class="line">    │   │   └── elementUI.js    （按需加载elementUI)</span><br><span class="line">    │   │   └── main.js         （程序入口）</span><br><span class="line">    │   ├── needs              (需求上传地址)</span><br><span class="line">    ├── server                （后端项目）</span><br><span class="line">    │   ├── contorllers         （控制器）</span><br><span class="line">    │   ├── models              （数据层）</span><br><span class="line">    │   ├── routers             （路由）</span><br><span class="line">    │   ├── util                （工具）</span><br><span class="line">    │   ├── app.js              （项目入口）</span><br><span class="line">    └── readme.md</span><br></pre></td></tr></table></figure>
+<hr>
+<p>#后端代码实现</p>
+<hr>
+<p>后端接口的具体工作流程如下：</p>
+<pre><code>访问 api 地址
+
+&gt;&gt;&gt; 在 routers 里面对应 api 地址，调用回调函数
+
+&gt;&gt;&gt; 在 controllers 里面响应回调，调用操作数据库函数
+
+&gt;&gt;&gt; 在 models 里面实现了操作数据库的函数，通过 util
+    里面封装的数据库操作方法，完成对数据库的读写操作，
+    并返回相应数据。
+</code></pre><p>1、后端入口文件：<code>server/app.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e3db3b307e63?w=626&amp;h=498&amp;f=png&amp;s=81123" alt=""></p>
+<p>引入 koa 已经相关中间件，new 一个 koa 对象 app，使用 app.use 进行加载各个中间件并监听 3000 端口。<br>这样的话，对外暴露的就是 3000 端口，等路由和数据库操作部分操作完，就可以通过 <code>http://localhost:3000/+路由地址</code>进行接口请求</p>
+<p>2、路由文件：<br><code>server/router/api.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e9d3106f0048?w=710&amp;h=444&amp;f=png&amp;s=100365" alt=""></p>
+<p><code>server/router/index.js</code><br><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e4b28bcecb67?w=627&amp;h=200&amp;f=png&amp;s=29550" alt=""></p>
+<p>引入 koa-router，根据文档编写接口，并导出接口</p>
+<p>3、MySQL 数据库</p>
+<p>主要代码：<code>server/util/db.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e4f716ca65e0?w=847&amp;h=1061&amp;f=png&amp;s=185770" alt=""></p>
+<p>引入 mysql，通过 mysql.createPool 简历连接池，编写一个 query 方法用以执行 sql 语句。<br>pool.getConnection 创建数据  库链接，通过回调中的链接上下文 connection 中的 query 方法执行 sql 语句，执行完毕就释放连接池</p>
+<p> 自定义数据库操作方法：<code>server/util/dbMethods.js</code><br><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e58153934fd6?w=860&amp;h=582&amp;f=png&amp;s=97483" alt=""></p>
+<p>4、编写控制器</p>
+<p><code>server/controllers/needs.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e9c2b85c4e0c?w=774&amp;h=766&amp;f=png&amp;s=180135" alt=""></p>
+<p><code>server/controllers/user.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e8d25912202d?w=754&amp;h=414&amp;f=png&amp;s=67920" alt=""></p>
+<p>对应路由文件里面的回调函数，</p>
+<font color="red" size="1">注：我已经写好了。所以截图里面的各个方法里面已经有代码了。正常来说，是定义一个和路由文件里面的回调函数同名的方法，然后去 models 里面定义相关的数据库操作，然后在回到 controllers 里面调用 models 里面的操作。</font>
+
+<p>5、编写 models</p>
+<p><code>server/models/needs.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e9f74ed5b4aa?w=874&amp;h=1128&amp;f=png&amp;s=250737" alt=""></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ebd539821793?w=799&amp;h=284&amp;f=png&amp;s=59997" alt=""></p>
+<p><code>server/models/needs.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ebed0079e2a0?w=831&amp;h=805&amp;f=png&amp;s=166246" alt=""></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ebf60ccc60f0?w=799&amp;h=1029&amp;f=png&amp;s=177941" alt=""></p>
+<hr>
+<p>#数据库</p>
+<hr>
+<p>本项目需要两个表</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650eca3b4a3480a?w=331&amp;h=274&amp;f=png&amp;s=35306" alt=""></p>
+<p>needs 表：<br><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ecb590fec672?w=720&amp;h=766&amp;f=png&amp;s=85199" alt=""></p>
+<p>user 表：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ecbb92ecf52e?w=720&amp;h=710&amp;f=png&amp;s=80102" alt=""></p>
+<hr>
+<p>#前端代码实现</p>
+<hr>
+<p>1、采用 vue-cli 直接生成 vue 的模板项目,安装依赖并跑起来</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack needs</span><br><span class="line"></span><br><span class="line">cd needs</span><br><span class="line"></span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+<p>2、 编写路由文件</p>
+<p>路由文件：<code>client/src/router/index.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650dff656bcf92c?w=534&amp;h=750&amp;f=png&amp;s=81941" alt=""></p>
+<p>3、页面编写，代码比较多久不贴了，<a href="https://github.com/HOTAO/needs/tree/master/client/src/views" target="_blank" rel="noopener">github 上看吧</a></p>
+<p>4、api 对接</p>
+<p>axios 配置文件：<code>client/src/api/axios.js</code><br>主要是，接口地址以及对请求的拦截</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e0b4d0f91c7e?w=597&amp;h=1067&amp;f=png&amp;s=146773" alt=""></p>
+<p>需求相关的接口：<code>client/src/api/modules/needs.js</code><br><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e0f0f13b6e7a?w=828&amp;h=724&amp;f=png&amp;s=115360" alt=""></p>
+<p>用户相关的接口：<code>client/src/api/modules/user.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e122858f27cf?w=510&amp;h=375&amp;f=png&amp;s=50218" alt=""></p>
+<p>api 的的入口文件：<code>client/src/api/index.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e179f8a5ebe6?w=432&amp;h=262&amp;f=png&amp;s=25440" alt=""></p>
+<p> 前端部分比较简单，需要讲的不多，相信大佬们要写一个出来，也是分分钟的事~</p>
+<p><a href="https://github.com/HOTAO/needs/tree/master/client" target="_blank" rel="noopener">完整代码移步到 github</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">全栈</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/06/FullStackDeveloper/index/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Vue/vue" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/05/Vue/vue/">js细节知识点，这次好好写一下，不要在等到用时再去baidu了</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/05/Vue/vue/" class="archive-article-date">
+  	<time datetime="2018-06-05T08:49:12.530Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="动态组件"><a href="#动态组件" class="headerlink" title="动态组件"></a>动态组件</h1><h2 id="1、keep-alive"><a href="#1、keep-alive" class="headerlink" title="1、keep-alive"></a>1、keep-alive</h2><p>作用：包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们</p>
+<p>实践：<code>&lt;keep-alive&gt;&lt;/keep-alive&gt;</code>里面的所有组件将会被缓存<br>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"main"</span>&gt;</span><br><span class="line">    &lt;keep-alive&gt;</span><br><span class="line">      &lt;router-view /&gt;</span><br><span class="line">    &lt;<span class="regexp">/keep-alive&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+<p>若要缓存特定的页面或者组件，只需要使用<code>include</code>或者<code>exclude</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将会缓存name为home和prodect的页面</span></span><br><span class="line"><span class="comment">// 写法1，逗号隔开</span></span><br><span class="line">&lt;keep-alive include=<span class="string">"home,product"</span>&gt;</span><br><span class="line">  &lt;router-view /&gt;</span><br><span class="line">&lt;<span class="regexp">/keep-alive&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 写法2，正则表达式（include前一定要v-bind:或者用缩写:）</span></span><br><span class="line"><span class="regexp">&lt;keep-alive :include="/</span>a|b/<span class="string">"&gt;</span></span><br><span class="line"><span class="string">  &lt;router-view /&gt;</span></span><br><span class="line"><span class="string">&lt;/keep-alive&gt;</span></span><br><span class="line"><span class="string">// 写法3，数组（include前一定要v-bind:或者用缩写:）</span></span><br><span class="line"><span class="string">&lt;keep-alive :include="</span>[<span class="string">'a'</span>, <span class="string">'b'</span>]<span class="string">"&gt;</span></span><br><span class="line"><span class="string">  &lt;router-view /&gt;</span></span><br><span class="line"><span class="string">&lt;/keep-alive&gt;</span></span><br><span class="line"><span class="string">// 将会缓存除了name为prodect的所有页面，写法和上面的include一样</span></span><br><span class="line"><span class="string">&lt;keep-alive exclude="</span>product<span class="string">"&gt;</span></span><br><span class="line"><span class="string">  &lt;router-view /&gt;</span></span><br><span class="line"><span class="string">&lt;/keep-alive&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/05/Vue/vue/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Js/js细节知识点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/22/Js/js细节知识点/">js细节知识点</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/22/Js/js细节知识点/" class="archive-article-date">
+  	<time datetime="2018-05-22T01:29:19.373Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="如何判断一个对象是不是数组类型"><a href="#如何判断一个对象是不是数组类型" class="headerlink" title="如何判断一个对象是不是数组类型"></a>如何判断一个对象是不是数组类型</h4><p>一般我们判断类型，很顺利的就会联想到 <code>typeof</code>，但是数组类型和对象类型在 <code>typeof</code> 的时候，返回的都是 <code>“object”</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> &#123;&#125;) <span class="comment">// 返回字符串"object"</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> []) <span class="comment">// 返回字符串"object "</span></span><br></pre></td></tr></table></figure>
+<p>那么该怎么判断一个对象是不是数组类型呢？</p>
+<h5 id="1、从原型入手，Array-prototype-isPrototypeOf-obj"><a href="#1、从原型入手，Array-prototype-isPrototypeOf-obj" class="headerlink" title="1、从原型入手，Array.prototype.isPrototypeOf(obj);"></a>1、从原型入手，Array.prototype.isPrototypeOf(obj);</h5><p><code>isPrototypeOf()</code>函数用于指示对象是否存在于另一个对象的原型链中。如果存在，返回<code>true</code>，否则返回<code>false</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.isPrototypeOf([]) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.isPrototypeOf(&#123;&#125;) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h5 id="2、也可以从构造函数入手，object-instanceof-constructor"><a href="#2、也可以从构造函数入手，object-instanceof-constructor" class="headerlink" title="2、也可以从构造函数入手，object instanceof constructor"></a>2、也可以从构造函数入手，object instanceof constructor</h5><p><code>instanceof</code> 运算符用来检测 <code>constructor.prototype</code>是否存在于参数 <code>object</code> 的原型链上。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[] <span class="keyword">instanceof</span> <span class="built_in">Array</span> <span class="comment">// true  因为Object.getPrototypeOf([]) === Array.prototype</span></span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/22/Js/js细节知识点/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Js/正则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -684,157 +991,10 @@
 
 
   
-    <article id="post-quickApp/followMe1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/12/quickApp/followMe1/">快应用之手摸手，跟我走（1）</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/12/quickApp/followMe1/" class="archive-article-date">
-  	<time datetime="2018-04-12T07:57:04.817Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>快应用发布快两周啦。这两天有空，就捣鼓了一个快应用。整体感觉来说，交互很流畅，基本功能和组件都有。上手也很快。希望官网推广能做好。好了，话不多说，先上 gitHub <a href="https://github.com/HOTAO/gankQuick" target="_blank" rel="noopener">(传送门)</a></p>
-<h2 id="gankQuick-快应用（妹子篇）"><a href="#gankQuick-快应用（妹子篇）" class="headerlink" title="gankQuick-快应用（妹子篇）"></a>gankQuick-快应用（妹子篇）</h2><p><a href="https://doc.quickapp.cn/" target="_blank" rel="noopener">快应用官方文档</a></p>
-<p>p 个 s: 环境搭建之类的 跟官网上面写的基本一样。照着做就行了。</p>
-<ul>
-<li>注意：部分机子可能会出现手机上可以正常访问，浏览器上出现白屏，不要怀疑你的配置是不是有问题。有问题是那个机子可能设配不了</li>
-</ul>
-<h3 id="我们还是来搞个项目吧。"><a href="#我们还是来搞个项目吧。" class="headerlink" title="我们还是来搞个项目吧。"></a>我们还是来搞个项目吧。</h3>
-        
-          <a class="article-more-a" href="/2018/04/12/quickApp/followMe1/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">快应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/12/quickApp/followMe1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hexo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/12/hexo/">hexo 从0开始</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/12/hexo/" class="archive-article-date">
-  	<time datetime="2018-04-12T06:27:37.943Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="hexo-从0开始"><a href="#hexo-从0开始" class="headerlink" title="hexo 从0开始"></a>hexo 从0开始</h4><p>首先是安装</p>
-<p>前置条件：</p>
-<p>已经安装了<code>node</code>和<code>git</code>，并且已经有GitHub账号<br>如果上述还有没有，百度一下这么弄 简单得不能再简单了，就不在这里赘述了😝</p>
-<p>######正式安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo // 我是这么安装就成功了的，据说，有人失败，需要 sudo npm install -g hexo</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2018/04/12/hexo/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/12/hexo/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -924,11 +1084,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">全栈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">

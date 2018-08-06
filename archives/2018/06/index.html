@@ -6,34 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://hotao.io.com">
-  <title>使用阿里云的ecs服务器，创建ftp站点 | HOTAO</title>
+  <title>Archives: 2018/6 | HOTAO</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来 1、远程连接到服务器（我是mac上直接 ssh root@服务器IP地址 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的） 2、安装vsftpd 1yum install -y vsftpd">
+  <meta name="description" content="Front End Engineer">
 <meta name="keywords" content="rubbish">
-<meta property="og:type" content="article">
-<meta property="og:title" content="使用阿里云的ecs服务器，创建ftp站点">
-<meta property="og:url" content="http://hotao.io.com/2018/04/17/ftp/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HOTAO">
+<meta property="og:url" content="http://hotao.io.com/archives/2018/06/index.html">
 <meta property="og:site_name" content="HOTAO">
-<meta property="og:description" content="第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来 1、远程连接到服务器（我是mac上直接 ssh root@服务器IP地址 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的） 2、安装vsftpd 1yum install -y vsftpd">
+<meta property="og:description" content="Front End Engineer">
 <meta property="og:locale" content="zh">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d275a9c978386?w=577&h=72&f=jpeg&s=20267">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d276982288e2a?w=567&h=70&f=jpeg&s=18597">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d23796ccfff59?w=901&h=89&f=jpeg&s=27089">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d239cbd88903a?w=935&h=225&f=jpeg&s=38819">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d23e42d79647e?w=641&h=260&f=jpeg&s=19245">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d249e0049b831?w=579&h=56&f=jpeg&s=21610">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d24dec83d5ae4?w=1241&h=360&f=jpeg&s=83590">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d25b1d1a480a0?w=355&h=365&f=jpeg&s=49164">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d25df8fa5f9ae?w=872&h=285&f=jpeg&s=47986">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d269fe1e48040?w=425&h=52&f=jpeg&s=15663">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d264ff674834f?w=470&h=75&f=jpeg&s=16607">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d26d65057e595?w=1118&h=666&f=jpeg&s=134186">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d3019422d68ba?w=802&h=266&f=jpeg&s=69481">
-<meta property="og:updated_time" content="2018-04-17T09:53:32.567Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用阿里云的ecs服务器，创建ftp站点">
-<meta name="twitter:description" content="第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来 1、远程连接到服务器（我是mac上直接 ssh root@服务器IP地址 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的） 2、安装vsftpd 1yum install -y vsftpd">
-<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/4/17/162d275a9c978386?w=577&h=72&f=jpeg&s=20267">
+<meta name="twitter:title" content="HOTAO">
+<meta name="twitter:description" content="Front End Engineer">
   
     <link rel="alternative" href="/atom.xml" title="HOTAO" type="application/atom+xml">
   
@@ -163,214 +148,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ftp" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      使用阿里云的ecs服务器，创建ftp站点
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/06/05/Vue/vue/" class="archive-article-date">
+  	<time datetime="2018-06-05T08:49:12.530Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-05</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/06/05/Vue/vue/">js细节知识点，这次好好写一下，不要在等到用时再去baidu了</a>
     </h1>
   
 
-        
-        <a href="/2018/04/17/ftp/" class="archive-article-date">
-  	<time datetime="2018-04-17T03:48:36.826Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>第一次玩这种东西，踩了不少坑，也走了不少弯路，总结出了一套流程，现在记录下来</p>
-<p>1、远程连接到服务器（我是mac上直接 <code>ssh root@服务器IP地址</code> 连接的，也可以直接在阿里云上链接，然后操作，效果是一样的）</p>
-<p>2、安装vsftpd</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y vsftpd</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>3、运行一下命令，并查看<code>etc/vsftpd</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/vsftpd</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
-<p><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d275a9c978386?w=577&amp;h=72&amp;f=jpeg&amp;s=20267" alt=""><br>4、运行以下命令设置开机自启动。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable vsftpd.service</span><br></pre></td></tr></table></figure></p>
-<p>5、运行以下命令启动 FTP 服务。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start vsftpd.service</span><br></pre></td></tr></table></figure>
-<p>6、运行以下命令查看 FTP 服务端口。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -antup | grep ftp</span><br></pre></td></tr></table></figure>
-<p><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d276982288e2a?w=567&amp;h=70&amp;f=jpeg&amp;s=18597" alt=""></p>
-<p>这个时候已经可以连接啦~~~（匿名连接）</p>
-<p>（我用的是 fileZilla）<br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d23796ccfff59?w=901&amp;h=89&amp;f=jpeg&amp;s=27089" alt=""></p>
-<p>点快速连接，可以看到连接成功，并且列出了“/”目录。其实就是：/var/ftp/ 目录<br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d239cbd88903a?w=935&amp;h=225&amp;f=jpeg&amp;s=38819" alt=""><br>vsftpd的默认根目录为：/var/ftp/pub<br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d23e42d79647e?w=641&amp;h=260&amp;f=jpeg&amp;s=19245" alt=""></p>
-<h3 id="匿名ftp的设置"><a href="#匿名ftp的设置" class="headerlink" title="匿名ftp的设置"></a>匿名ftp的设置</h3><p>出于安全方面的考虑，vsftpd在默认情况下不允许用户通过匿名FTP上传文件，创建目录等更改操作，但是可以修改vsftpd.conf配置文件的选项，可以赋予匿名ftp更多的权限。(<strong>不信可以随便拖个文件过去pub文件夹</strong>)</p>
-<p>1、 允许匿名ftp上传文件。</p>
-<p>  修改/etc/vsftpd/vsftpd.conf</p>
-<pre><code>`write_enable=YES`
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-`anon_upload_enable=YES`
-</code></pre><p>2、更改/var/ftp/pub目录的权限，为ftp用户添加写权限，并重新加载配置文件</p>
-<pre><code>chmod o+w /var/ftp/pub/                     #更改/var/ftp/pub目录的权限
-systemctl restart vsftpd.service            #重启ftp服务
-</code></pre><p><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d249e0049b831?w=579&amp;h=56&amp;f=jpeg&amp;s=21610" alt=""></p>
-<p>3、测试一下，拖个图片过去pub文件夹，OK了~~<br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d24dec83d5ae4?w=1241&amp;h=360&amp;f=jpeg&amp;s=83590" alt=""></p>
-<h3 id="配置本地用户登录"><a href="#配置本地用户登录" class="headerlink" title="配置本地用户登录"></a>配置本地用户登录</h3><p>本地用户登录就是指使用Linux操作系统中的用户账号和密码登录ftp服务器，vsftp安装后默只支持匿名ftp登录，用户如果试图使用Linux操作系统中的账号登录服务器，将会被vsftpd拒绝(<strong>这句话抄的，说实话，看得很拗口，可以不看的~~~直接跟着下面的步骤走….</strong>)</p>
-<p>1、本地创建一个账号密码来登录ftp（ftphest就是你的用户名，你想怎么起就怎么起）</p>
-<pre><code>useradd ftptest                    #创建ftptest用户
-passwd ftptest                     #修改ftptest用户密码
-</code></pre><p>2、修改/etc/vsftpd/vsftpd.conf</p>
-<p><code>anonymous enable=NO</code></p>
-<p><code>local_enable=YES</code><br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d25b1d1a480a0?w=355&amp;h=365&amp;f=jpeg&amp;s=49164" alt=""></p>
-<p>3、用这个上面设置的账号密码来链接ftp，不出意外，你会看到这个（反正我是看到了，如果你的没有，是正常连接，当我什么都没说）<br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d25df8fa5f9ae?w=872&amp;h=285&amp;f=jpeg&amp;s=47986" alt=""></p>
-<p>4、遇到上面这个问题，别去百度了，太**坑了😭</p>
-<p>怎么办呢？注意500那行，有个地址 <code>/home/vsftpd</code></p>
-<p>那就到home目录下看看</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
-<p><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d269fe1e48040?w=425&amp;h=52&amp;f=jpeg&amp;s=15663" alt=""><br>发现压根就没有vsftpd这个文件夹，呵~不懂说什么好😂<br>既然发现没有，那就自己建一个咯<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir vsftpd</span><br><span class="line">ls</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d264ff674834f?w=470&amp;h=75&amp;f=jpeg&amp;s=16607" alt=""></p>
-<p>好了 文件夹有了，在连接一次试试<br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d26d65057e595?w=1118&amp;h=666&amp;f=jpeg&amp;s=134186" alt=""><br>OK 大功告成！！</p>
-<p>补充：如果发生如下情况，请执行 <code>sudo chmod -R 777 /home/vsftpd</code>，设置/home/vsftpd 的权限就可以了<br><img src="https://user-gold-cdn.xitu.io/2018/4/17/162d3019422d68ba?w=802&amp;h=266&amp;f=jpeg&amp;s=69481" alt=""></p>
-<h3 id="记录一下vsftpd的命令"><a href="#记录一下vsftpd的命令" class="headerlink" title="记录一下vsftpd的命令"></a>记录一下vsftpd的命令</h3><p>启动命令 <code>systemctl start vsftpd.service</code></p>
-<p>停止命令 <code>systemctl stop vsftpd.service</code></p>
-<p>重新启动 <code>systemctl restart vsftpd.service</code></p>
-<p>检查vsfepd服务的允许状态 <code>systemctl status vsftpd.service</code></p>
-<p>卸载vsftp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa |grep vsftp</span><br></pre></td></tr></table></figure></p>
-<p>得到 vsftpd-3.0.2-22.el7.x86_64</p>
-<p>执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e vsftpd-3.0.2-22.el7.x86_64</span><br></pre></td></tr></table></figure>
-      
+          
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://hotao.io.com/2018/04/17/ftp/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/05/15/Js/奇技淫巧/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          js的奇技淫巧,一些提高代码逼格的操作（谁也别想动我的代码）
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/04/12/quickApp/followMe2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">快应用之手摸手，跟我走（2）</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -393,8 +224,8 @@ passwd ftptest                     #修改ftptest用户密码
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
