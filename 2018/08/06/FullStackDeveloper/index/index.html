@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e0f0f13b6e7a?w=828&h=724&f=png&s=115360">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e122858f27cf?w=510&h=375&f=png&s=50218">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e179f8a5ebe6?w=432&h=262&f=png&s=25440">
-<meta property="og:updated_time" content="2018-08-06T10:38:35.174Z">
+<meta property="og:updated_time" content="2018-08-06T10:40:56.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="node + koa + mysql + vue做一个公司内部需求网站">
 <meta name="twitter:description" content="前言用 node 作为后端支持已经比较成熟了，很早以前就想自己动手，从零开始，前端+后端+数据库+部署都自己操作。 最近刚好 PM 想要一个公司内部的需求网站，并且公司的后端大佬们，没时间来写接口。😝 那就让我们动起手来，就有了这个项目。  #前置技能：  本项目，难度不大，只需要稍微花一点时间和有一点耐心，就可以掌握。 涉及的技术点和需要了解掌握的的技术如下：（就是要看文档啦~，痛苦的一匹）">
@@ -196,6 +196,7 @@
 <p>本项目，难度不大，只需要稍微花一点时间和有一点耐心，就可以掌握。</p>
 <p>涉及的技术点和需要了解掌握的的技术如下：（就是要看文档啦~，痛苦的一匹）</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">后端：</span><br><span class="line">  node            （只是用了node的环境，基本上没有它什么事）</span><br><span class="line">  koa             （基于koa搭建后端服务，提供api）</span><br><span class="line">  koa-router      （koa的路由中间件）</span><br><span class="line">  koa-bodyparser  （处理koa POST请求参数 的中间件）</span><br><span class="line">  koa-cors        （处理跨域问题的中间件）</span><br><span class="line">  mysql           （数据库，没啥好说的）</span><br><span class="line"></span><br><span class="line">前端：</span><br><span class="line">  vue             （基于vue搭建的后端服务）</span><br><span class="line">  vue-router      （vue-cli搭建的时候选一下就好了）</span><br><span class="line">  axios           （ajax请求库）</span><br><span class="line">  element-ui      （UI库）</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>#项目结构</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">└──needs</span><br><span class="line">    ├── client                （前端项目）</span><br><span class="line">    │   ├── build               （vue-cli生成，项目配置）</span><br><span class="line">    │   ├── config              （vue-cli生成，项目配置）</span><br><span class="line">    │   ├── src</span><br><span class="line">    │   │   └── api             （api地址）</span><br><span class="line">    │   │   └── assets          （静态资源）</span><br><span class="line">    │   │   └── components      （公共组件）</span><br><span class="line">    │   │   └── router          （路由）</span><br><span class="line">    │   │   └── style           （公共样式）</span><br><span class="line">    │   │   └── views           （各页面）</span><br><span class="line">    │   │   └── App.vue         （页面入口）</span><br><span class="line">    │   │   └── elementUI.js    （按需加载elementUI)</span><br><span class="line">    │   │   └── main.js         （程序入口）</span><br><span class="line">    │   ├── needs              (需求上传地址)</span><br><span class="line">    ├── server                （后端项目）</span><br><span class="line">    │   ├── contorllers         （控制器）</span><br><span class="line">    │   ├── models              （数据层）</span><br><span class="line">    │   ├── routers             （路由）</span><br><span class="line">    │   ├── util                （工具）</span><br><span class="line">    │   ├── app.js              （项目入口）</span><br><span class="line">    └── readme.md</span><br></pre></td></tr></table></figure>
 <hr>
@@ -263,7 +264,7 @@
 <p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e122858f27cf?w=510&amp;h=375&amp;f=png&amp;s=50218" alt=""></p>
 <p>api 的的入口文件：<code>client/src/api/index.js</code></p>
 <p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e179f8a5ebe6?w=432&amp;h=262&amp;f=png&amp;s=25440" alt=""></p>
-<p> 前端部分比较简单，需要讲的不多，相信大佬们要写一个出来，也是分分钟的事~</p>
+<p>前端部分比较简单，需要讲的不多，相信大佬们要写一个出来，也是分分钟的事~</p>
 <p><a href="https://github.com/HOTAO/needs/tree/master/client" target="_blank" rel="noopener">完整代码移步到 github</a></p>
 
       
@@ -493,11 +494,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">全栈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">全栈</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -505,11 +506,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
