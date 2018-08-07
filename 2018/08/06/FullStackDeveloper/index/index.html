@@ -8,14 +8,17 @@
   <link rel="dns-prefetch" href="http://hotao.io.com">
   <title>node + koa + mysql + vue做一个公司内部需求网站 | HOTAO</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言用 node 作为后端支持已经比较成熟了，很早以前就想自己动手，从零开始，前端+后端+数据库+部署都自己操作。 最近刚好 PM 想要一个公司内部的需求网站，并且公司的后端大佬们，没时间来写接口。😝 那就让我们动起手来，就有了这个项目。  #前置技能：  本项目，难度不大，只需要稍微花一点时间和有一点耐心，就可以掌握。 涉及的技术点和需要了解掌握的的技术如下：（就是要看文档啦~，痛苦的一匹）">
+  <meta name="description" content="前言用 node 作为后端支持已经比较成熟了，很早以前就想自己动手，从零开始，前端+后端+数据库+部署都自己操作。 最近刚好 PM 想要一个公司内部的需求网站，并且公司的后端大佬们，没时间来写接口。😝 那就让我们动起手来，就有了这个项目。  前置技能： 本项目，难度不大，只需要稍微花一点时间和有一点耐心，就可以掌握。 涉及的技术点和需要了解掌握的的技术如下：（就是要看文档啦~，痛苦的一匹） 1">
 <meta name="keywords" content="全栈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="node + koa + mysql + vue做一个公司内部需求网站">
 <meta property="og:url" content="http://hotao.io.com/2018/08/06/FullStackDeveloper/index/index.html">
 <meta property="og:site_name" content="HOTAO">
-<meta property="og:description" content="前言用 node 作为后端支持已经比较成熟了，很早以前就想自己动手，从零开始，前端+后端+数据库+部署都自己操作。 最近刚好 PM 想要一个公司内部的需求网站，并且公司的后端大佬们，没时间来写接口。😝 那就让我们动起手来，就有了这个项目。  #前置技能：  本项目，难度不大，只需要稍微花一点时间和有一点耐心，就可以掌握。 涉及的技术点和需要了解掌握的的技术如下：（就是要看文档啦~，痛苦的一匹）">
+<meta property="og:description" content="前言用 node 作为后端支持已经比较成熟了，很早以前就想自己动手，从零开始，前端+后端+数据库+部署都自己操作。 最近刚好 PM 想要一个公司内部的需求网站，并且公司的后端大佬们，没时间来写接口。😝 那就让我们动起手来，就有了这个项目。  前置技能： 本项目，难度不大，只需要稍微花一点时间和有一点耐心，就可以掌握。 涉及的技术点和需要了解掌握的的技术如下：（就是要看文档啦~，痛苦的一匹） 1">
 <meta property="og:locale" content="zh">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650eca3b4a3480a?w=331&h=274&f=png&s=35306">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650ecb590fec672?w=720&h=766&f=png&s=85199">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650ecbb92ecf52e?w=720&h=710&f=png&s=80102">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e3db3b307e63?w=626&h=498&f=png&s=81123">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e9d3106f0048?w=710&h=444&f=png&s=100365">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e4b28bcecb67?w=627&h=200&f=png&s=29550">
@@ -27,19 +30,16 @@
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650ebd539821793?w=799&h=284&f=png&s=59997">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650ebed0079e2a0?w=831&h=805&f=png&s=166246">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650ebf60ccc60f0?w=799&h=1029&f=png&s=177941">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650eca3b4a3480a?w=331&h=274&f=png&s=35306">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650ecb590fec672?w=720&h=766&f=png&s=85199">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650ecbb92ecf52e?w=720&h=710&f=png&s=80102">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650dff656bcf92c?w=534&h=750&f=png&s=81941">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e0b4d0f91c7e?w=597&h=1067&f=png&s=146773">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e0f0f13b6e7a?w=828&h=724&f=png&s=115360">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e122858f27cf?w=510&h=375&f=png&s=50218">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e179f8a5ebe6?w=432&h=262&f=png&s=25440">
-<meta property="og:updated_time" content="2018-08-06T10:40:56.205Z">
+<meta property="og:updated_time" content="2018-08-07T03:08:36.210Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="node + koa + mysql + vue做一个公司内部需求网站">
-<meta name="twitter:description" content="前言用 node 作为后端支持已经比较成熟了，很早以前就想自己动手，从零开始，前端+后端+数据库+部署都自己操作。 最近刚好 PM 想要一个公司内部的需求网站，并且公司的后端大佬们，没时间来写接口。😝 那就让我们动起手来，就有了这个项目。  #前置技能：  本项目，难度不大，只需要稍微花一点时间和有一点耐心，就可以掌握。 涉及的技术点和需要了解掌握的的技术如下：（就是要看文档啦~，痛苦的一匹）">
-<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650e3db3b307e63?w=626&h=498&f=png&s=81123">
+<meta name="twitter:description" content="前言用 node 作为后端支持已经比较成熟了，很早以前就想自己动手，从零开始，前端+后端+数据库+部署都自己操作。 最近刚好 PM 想要一个公司内部的需求网站，并且公司的后端大佬们，没时间来写接口。😝 那就让我们动起手来，就有了这个项目。  前置技能： 本项目，难度不大，只需要稍微花一点时间和有一点耐心，就可以掌握。 涉及的技术点和需要了解掌握的的技术如下：（就是要看文档啦~，痛苦的一匹） 1">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/8/6/1650eca3b4a3480a?w=331&h=274&f=png&s=35306">
   
     <link rel="alternative" href="/atom.xml" title="HOTAO" type="application/atom+xml">
   
@@ -191,17 +191,23 @@
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>用 node 作为后端支持已经比较成熟了，很早以前就想自己动手，从零开始，前端+后端+数据库+部署都自己操作。 最近刚好 PM 想要一个公司内部的需求网站，并且公司的后端大佬们，没时间来写接口。😝 那就让我们动起手来，就有了这个项目。</p>
 <hr>
-<p>#前置技能：</p>
-<hr>
+<h1 id="前置技能："><a href="#前置技能：" class="headerlink" title="前置技能："></a>前置技能：</h1><hr>
 <p>本项目，难度不大，只需要稍微花一点时间和有一点耐心，就可以掌握。</p>
 <p>涉及的技术点和需要了解掌握的的技术如下：（就是要看文档啦~，痛苦的一匹）</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">后端：</span><br><span class="line">  node            （只是用了node的环境，基本上没有它什么事）</span><br><span class="line">  koa             （基于koa搭建后端服务，提供api）</span><br><span class="line">  koa-router      （koa的路由中间件）</span><br><span class="line">  koa-bodyparser  （处理koa POST请求参数 的中间件）</span><br><span class="line">  koa-cors        （处理跨域问题的中间件）</span><br><span class="line">  mysql           （数据库，没啥好说的）</span><br><span class="line"></span><br><span class="line">前端：</span><br><span class="line">  vue             （基于vue搭建的后端服务）</span><br><span class="line">  vue-router      （vue-cli搭建的时候选一下就好了）</span><br><span class="line">  axios           （ajax请求库）</span><br><span class="line">  element-ui      （UI库）</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<p>#项目结构</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">└──needs</span><br><span class="line">    ├── client                （前端项目）</span><br><span class="line">    │   ├── build               （vue-cli生成，项目配置）</span><br><span class="line">    │   ├── config              （vue-cli生成，项目配置）</span><br><span class="line">    │   ├── src</span><br><span class="line">    │   │   └── api             （api地址）</span><br><span class="line">    │   │   └── assets          （静态资源）</span><br><span class="line">    │   │   └── components      （公共组件）</span><br><span class="line">    │   │   └── router          （路由）</span><br><span class="line">    │   │   └── style           （公共样式）</span><br><span class="line">    │   │   └── views           （各页面）</span><br><span class="line">    │   │   └── App.vue         （页面入口）</span><br><span class="line">    │   │   └── elementUI.js    （按需加载elementUI)</span><br><span class="line">    │   │   └── main.js         （程序入口）</span><br><span class="line">    │   ├── needs              (需求上传地址)</span><br><span class="line">    ├── server                （后端项目）</span><br><span class="line">    │   ├── contorllers         （控制器）</span><br><span class="line">    │   ├── models              （数据层）</span><br><span class="line">    │   ├── routers             （路由）</span><br><span class="line">    │   ├── util                （工具）</span><br><span class="line">    │   ├── app.js              （项目入口）</span><br><span class="line">    └── readme.md</span><br></pre></td></tr></table></figure>
+<h1 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">└──needs</span><br><span class="line">    ├── client                （前端项目）</span><br><span class="line">    │   ├── build               （vue-cli生成，项目配置）</span><br><span class="line">    │   ├── config              （vue-cli生成，项目配置）</span><br><span class="line">    │   ├── src</span><br><span class="line">    │   │   └── api             （api地址）</span><br><span class="line">    │   │   └── assets          （静态资源）</span><br><span class="line">    │   │   └── components      （公共组件）</span><br><span class="line">    │   │   └── router          （路由）</span><br><span class="line">    │   │   └── style           （公共样式）</span><br><span class="line">    │   │   └── views           （各页面）</span><br><span class="line">    │   │   └── App.vue         （页面入口）</span><br><span class="line">    │   │   └── elementUI.js    （按需加载elementUI)</span><br><span class="line">    │   │   └── main.js         （程序入口）</span><br><span class="line">    │   ├── needs              (需求上传地址)</span><br><span class="line">    ├── server                （后端项目）</span><br><span class="line">    │   ├── contorllers         （控制器）</span><br><span class="line">    │   ├── models              （数据层）</span><br><span class="line">    │   ├── routers             （路由）</span><br><span class="line">    │   ├── util                （工具）</span><br><span class="line">    │   ├── app.js              （项目入口）</span><br><span class="line">    └── readme.md</span><br></pre></td></tr></table></figure>
 <hr>
-<p>#后端代码实现</p>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><hr>
+<p>本项目需要两个表</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650eca3b4a3480a?w=331&amp;h=274&amp;f=png&amp;s=35306" alt=""></p>
+<p>needs 表：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ecb590fec672?w=720&amp;h=766&amp;f=png&amp;s=85199" alt=""></p>
+<p>user 表：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ecbb92ecf52e?w=720&amp;h=710&amp;f=png&amp;s=80102" alt=""></p>
+<p>手动创建即可，sql 语句创建也行，反正有数据库，有表就 OK 了</p>
 <hr>
+<h1 id="后端代码实现"><a href="#后端代码实现" class="headerlink" title="后端代码实现"></a>后端代码实现</h1><hr>
 <p>后端接口的具体工作流程如下：</p>
 <pre><code>访问 api 地址
 
@@ -212,26 +218,35 @@
 &gt;&gt;&gt; 在 models 里面实现了操作数据库的函数，通过 util
     里面封装的数据库操作方法，完成对数据库的读写操作，
     并返回相应数据。
-</code></pre><p>1、后端入口文件：<code>server/app.js</code></p>
+</code></pre><blockquote>
+<p>1、后端入口文件：<code>server/app.js</code></p>
+</blockquote>
 <p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e3db3b307e63?w=626&amp;h=498&amp;f=png&amp;s=81123" alt=""></p>
 <p>引入 koa 已经相关中间件，new 一个 koa 对象 app，使用 app.use 进行加载各个中间件并监听 3000 端口。<br>这样的话，对外暴露的就是 3000 端口，等路由和数据库操作部分操作完，就可以通过 <code>http://localhost:3000/+路由地址</code>进行接口请求</p>
-<p>2、路由文件：<br><code>server/router/api.js</code></p>
+<blockquote>
+<p>2、路由文件：</p>
+</blockquote>
+<p><code>server/router/api.js</code></p>
 <p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e9d3106f0048?w=710&amp;h=444&amp;f=png&amp;s=100365" alt=""></p>
 <p><code>server/router/index.js</code><br><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e4b28bcecb67?w=627&amp;h=200&amp;f=png&amp;s=29550" alt=""></p>
 <p>引入 koa-router，根据文档编写接口，并导出接口</p>
+<blockquote>
 <p>3、MySQL 数据库</p>
-<p>主要代码：<code>server/util/db.js</code></p>
+</blockquote>
+<ol>
+<li>主要代码：<code>server/util/db.js</code></li>
+</ol>
 <p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e4f716ca65e0?w=847&amp;h=1061&amp;f=png&amp;s=185770" alt=""></p>
-<p>引入 mysql，通过 mysql.createPool 简历连接池，编写一个 query 方法用以执行 sql 语句。<br>pool.getConnection 创建数据  库链接，通过回调中的链接上下文 connection 中的 query 方法执行 sql 语句，执行完毕就释放连接池</p>
-<p> 自定义数据库操作方法：<code>server/util/dbMethods.js</code><br><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e58153934fd6?w=860&amp;h=582&amp;f=png&amp;s=97483" alt=""></p>
+<p>a、引入 mysql<br>b、通过 mysql.createPool 建立连接池<br>c、编写一个 query 方法用以执行 sql 语句<br>d、pool.getConnection 创建数据库链接，通过回调中的连接上下文 connection 中的 query 方法执行 sql 语句，执行完毕就释放当前连接</p>
+<p>2. 自定义数据库操作方法：<code>server/util/dbMethods.js</code></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e58153934fd6?w=860&amp;h=582&amp;f=png&amp;s=97483" alt=""></p>
+<p><code>andWhere</code> 函数用来处理多个可选参数的时 sql 语句的拼接</p>
 <p>4、编写控制器</p>
 <p><code>server/controllers/needs.js</code></p>
 <p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e9c2b85c4e0c?w=774&amp;h=766&amp;f=png&amp;s=180135" alt=""></p>
 <p><code>server/controllers/user.js</code></p>
 <p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e8d25912202d?w=754&amp;h=414&amp;f=png&amp;s=67920" alt=""></p>
-<p>对应路由文件里面的回调函数，</p>
-<font color="red" size="1">注：我已经写好了。所以截图里面的各个方法里面已经有代码了。正常来说，是定义一个和路由文件里面的回调函数同名的方法，然后去 models 里面定义相关的数据库操作，然后在回到 controllers 里面调用 models 里面的操作。</font>
-
+<p>对应路由文件里面的回调函数，调用 models 里面对数据库操作的  方法并返回相应的内容给到接口</p>
 <p>5、编写 models</p>
 <p><code>server/models/needs.js</code></p>
 <p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e9f74ed5b4aa?w=874&amp;h=1128&amp;f=png&amp;s=250737" alt=""></p>
@@ -239,24 +254,25 @@
 <p><code>server/models/needs.js</code></p>
 <p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ebed0079e2a0?w=831&amp;h=805&amp;f=png&amp;s=166246" alt=""></p>
 <p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ebf60ccc60f0?w=799&amp;h=1029&amp;f=png&amp;s=177941" alt=""></p>
+<p>models 里面定义对数据库操作的方法，在<code>server/util/db.js</code>中，定义了一个名为 query 的方法，主要是使用这个方法。</p>
+<p>有一部分是可以在<code>server/util/db.js</code>里面单独定义一个函数，例如：<code>insertData()</code>、<code>deleteNeedById()</code>等，这样可以让代码看起来更加语义化，也减少了耦合</p>
 <hr>
-<p>#数据库</p>
-<hr>
-<p>本项目需要两个表</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650eca3b4a3480a?w=331&amp;h=274&amp;f=png&amp;s=35306" alt=""></p>
-<p>needs 表：<br><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ecb590fec672?w=720&amp;h=766&amp;f=png&amp;s=85199" alt=""></p>
-<p>user 表：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650ecbb92ecf52e?w=720&amp;h=710&amp;f=png&amp;s=80102" alt=""></p>
-<hr>
-<p>#前端代码实现</p>
-<hr>
-<p>1、采用 vue-cli 直接生成 vue 的模板项目,安装依赖并跑起来</p>
+<h1 id="前端代码实现"><a href="#前端代码实现" class="headerlink" title="前端代码实现"></a>前端代码实现</h1><hr>
+<blockquote>
+<p>1、采用 vue-cli 直接生成 vue 的模板项目，安装依赖并且跑起来</p>
+</blockquote>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack needs</span><br><span class="line"></span><br><span class="line">cd needs</span><br><span class="line"></span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>2、 编写路由文件</p>
+</blockquote>
 <p>路由文件：<code>client/src/router/index.js</code></p>
 <p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650dff656bcf92c?w=534&amp;h=750&amp;f=png&amp;s=81941" alt=""></p>
-<p>3、页面编写，代码比较多久不贴了，<a href="https://github.com/HOTAO/needs/tree/master/client/src/views" target="_blank" rel="noopener">github 上看吧</a></p>
+<blockquote>
+<p>3、页面编写，代码比较多，就不贴了，附上<a href="https://github.com/HOTAO/needs/tree/master/client/src/views" target="_blank" rel="noopener">传送门</a>吧</p>
+</blockquote>
+<blockquote>
 <p>4、api 对接</p>
+</blockquote>
 <p>axios 配置文件：<code>client/src/api/axios.js</code><br>主要是，接口地址以及对请求的拦截</p>
 <p><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e0b4d0f91c7e?w=597&amp;h=1067&amp;f=png&amp;s=146773" alt=""></p>
 <p>需求相关的接口：<code>client/src/api/modules/needs.js</code><br><img src="https://user-gold-cdn.xitu.io/2018/8/6/1650e0f0f13b6e7a?w=828&amp;h=724&amp;f=png&amp;s=115360" alt=""></p>
@@ -494,11 +510,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">全栈</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">全栈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -506,11 +522,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
              
               <li class="article-tag-list-item">
