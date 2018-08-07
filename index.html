@@ -253,9 +253,9 @@
       
         <h1 id="动态组件"><a href="#动态组件" class="headerlink" title="动态组件"></a>动态组件</h1><h2 id="1、keep-alive"><a href="#1、keep-alive" class="headerlink" title="1、keep-alive"></a>1、keep-alive</h2><p>作用：包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们</p>
 <p>实践：<code>&lt;keep-alive&gt;&lt;/keep-alive&gt;</code>里面的所有组件将会被缓存<br>例如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"main"</span>&gt;</span><br><span class="line">    &lt;keep-alive&gt;</span><br><span class="line">      &lt;router-view /&gt;</span><br><span class="line">    &lt;<span class="regexp">/keep-alive&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"main"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">keep-alive</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">router-view</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>若要缓存特定的页面或者组件，只需要使用<code>include</code>或者<code>exclude</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将会缓存name为home和prodect的页面</span></span><br><span class="line"><span class="comment">// 写法1，逗号隔开</span></span><br><span class="line">&lt;keep-alive include=<span class="string">"home,product"</span>&gt;</span><br><span class="line">  &lt;router-view /&gt;</span><br><span class="line">&lt;<span class="regexp">/keep-alive&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 写法2，正则表达式（include前一定要v-bind:或者用缩写:）</span></span><br><span class="line"><span class="regexp">&lt;keep-alive :include="/</span>a|b/<span class="string">"&gt;</span></span><br><span class="line"><span class="string">  &lt;router-view /&gt;</span></span><br><span class="line"><span class="string">&lt;/keep-alive&gt;</span></span><br><span class="line"><span class="string">// 写法3，数组（include前一定要v-bind:或者用缩写:）</span></span><br><span class="line"><span class="string">&lt;keep-alive :include="</span>[<span class="string">'a'</span>, <span class="string">'b'</span>]<span class="string">"&gt;</span></span><br><span class="line"><span class="string">  &lt;router-view /&gt;</span></span><br><span class="line"><span class="string">&lt;/keep-alive&gt;</span></span><br><span class="line"><span class="string">// 将会缓存除了name为prodect的所有页面，写法和上面的include一样</span></span><br><span class="line"><span class="string">&lt;keep-alive exclude="</span>product<span class="string">"&gt;</span></span><br><span class="line"><span class="string">  &lt;router-view /&gt;</span></span><br><span class="line"><span class="string">&lt;/keep-alive&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 将会缓存name为home和prodect的页面</span><br><span class="line">// 写法1，逗号隔开</span><br><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span> <span class="attr">include</span>=<span class="string">"home,product"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br><span class="line">// 写法2，正则表达式（include前一定要v-bind:或者用缩写:）</span><br><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span> <span class="attr">:include</span>=<span class="string">"/a|b/"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br><span class="line">// 写法3，数组（include前一定要v-bind:或者用缩写:）</span><br><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span> <span class="attr">:include</span>=<span class="string">"['a', 'b']"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br><span class="line">// 将会缓存除了name为prodect的所有页面，写法和上面的include一样</span><br><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span> <span class="attr">exclude</span>=<span class="string">"product"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
       
 
@@ -1016,7 +1016,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1024,11 +1024,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1037,6 +1033,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">快应用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
             
             <div class="clearfix"></div>
