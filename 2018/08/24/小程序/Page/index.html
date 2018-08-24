@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://hotao.io.com">
-  <title>Tag: js | HOTAO</title>
+  <title>HOTAO</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Front End Engineer">
+  <meta name="description" content="小程序页面栈目前的版本，页面栈最多可容纳 10 个页面。每个页面在栈内都是一个 page 对象。 拿到这个对象，便可以对操作该页面的方法以及属性。    路由方法 页面栈结果     初始化 新页面入栈   打开新页面（wx.nacigateTo()） 新页面入栈   页面重定向（wx.redirectTo()） 当前页面出栈，新页面入栈   页面返回（wx.navigateBack） 页面不断出">
 <meta name="keywords" content="rubbish">
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:title" content="HOTAO">
-<meta property="og:url" content="http://hotao.io.com/tags/js/index.html">
+<meta property="og:url" content="http://hotao.io.com/2018/08/24/小程序/Page/index.html">
 <meta property="og:site_name" content="HOTAO">
-<meta property="og:description" content="Front End Engineer">
+<meta property="og:description" content="小程序页面栈目前的版本，页面栈最多可容纳 10 个页面。每个页面在栈内都是一个 page 对象。 拿到这个对象，便可以对操作该页面的方法以及属性。    路由方法 页面栈结果     初始化 新页面入栈   打开新页面（wx.nacigateTo()） 新页面入栈   页面重定向（wx.redirectTo()） 当前页面出栈，新页面入栈   页面返回（wx.navigateBack） 页面不断出">
 <meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2018-08-24T02:17:34.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HOTAO">
-<meta name="twitter:description" content="Front End Engineer">
+<meta name="twitter:description" content="小程序页面栈目前的版本，页面栈最多可容纳 10 个页面。每个页面在栈内都是一个 page 对象。 拿到这个对象，便可以对操作该页面的方法以及属性。    路由方法 页面栈结果     初始化 新页面入栈   打开新页面（wx.nacigateTo()） 新页面入栈   页面重定向（wx.redirectTo()） 当前页面出栈，新页面入栈   页面返回（wx.navigateBack） 页面不断出">
   
     <link rel="alternative" href="/atom.xml" title="HOTAO" type="application/atom+xml">
   
@@ -148,174 +149,186 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-小程序/Page" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="小程序页面栈"><a href="#小程序页面栈" class="headerlink" title="小程序页面栈"></a>小程序页面栈</h1><p>目前的版本，页面栈最多可容纳 10 个页面。每个页面在栈内都是一个 page 对象。<font color="red"> 拿到这个对象，便可以对操作该页面的方法以及属性。</font></p>
+<table>
+<thead>
+<tr>
+<th>路由方法</th>
+<th style="text-align:center">页面栈结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始化</td>
+<td style="text-align:center">新页面入栈</td>
+</tr>
+<tr>
+<td>打开新页面（wx.nacigateTo()）</td>
+<td style="text-align:center">新页面入栈</td>
+</tr>
+<tr>
+<td>页面重定向（wx.redirectTo()）</td>
+<td style="text-align:center">当前页面出栈，新页面入栈</td>
+</tr>
+<tr>
+<td>页面返回（wx.navigateBack）</td>
+<td style="text-align:center">页面不断出栈，直至目标返回页</td>
+</tr>
+<tr>
+<td>Tab 切换</td>
+<td style="text-align:center">页面全部出栈，tab 页面入栈</td>
+</tr>
+<tr>
+<td>重加载</td>
+<td style="text-align:center">页面全部出栈，重加载页面入栈</td>
+</tr>
+</tbody>
+</table>
+<h2 id="如何获取页面栈内的-Page-对象"><a href="#如何获取页面栈内的-Page-对象" class="headerlink" title="如何获取页面栈内的 Page 对象"></a>如何获取页面栈内的 Page 对象</h2><p>通过 getCurrentPages()获取栈内所有对象，根据下标获取想要的 page 对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pages = getCurrentPages() <span class="comment">// 得到栈内所有对线，返回值是数组</span></span><br></pre></td></tr></table></figure>
+<h2 id="实用场景"><a href="#实用场景" class="headerlink" title="实用场景"></a>实用场景</h2><p>现在有个需求是这样的：</p>
+<p>当前是一个用户信息的编辑页面(A)，有一项是学校的填写。填写的方式是点击学校的输入框，打开一个新的页面（B），在新页面里通过 输入关键字搜索选择学校或者根据当前的位置选择附近的学校，然后把选择的学校告诉页面 A。</p>
+<p>上面的需求就是 A 页面 跳转到 B 页面，在 B 页面进行操作后，返回 A 页面并带回操作结果</p>
+<p>代码流程</p>
+<p>1、A 调用<code>wx.navigateTo()</code>，跳转到 B 页面</p>
+<p>2、B 页面从栈里面取出 A 页面的 Page 对象，并做赋值操作：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pages = getCurrentPages() <span class="comment">// 得到栈内所有对线，返回值是数组</span></span><br><span class="line"><span class="keyword">const</span> currPage = pages[pages.length - <span class="number">1</span>] <span class="comment">// 当前页面（即B页面）的page对象</span></span><br><span class="line"><span class="keyword">const</span> prevPage = pages[page.length - <span class="number">2</span>] <span class="comment">// 父级页面（即A页面）的page对象</span></span><br><span class="line"></span><br><span class="line">prevPage.setDate(&#123;</span><br><span class="line">  school: <span class="string">'北京大学'</span> <span class="comment">// 直接用setDate()给A页面赋值</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>3、调用<code>wx.navigateBack()</code>，回到上一个页面（即 A 页面）</p>
+<p>这样其实也是实现了页面间的通讯。相比起要用 eventBus 这类的方法来说，更加方便使用，而且也不需要添加新的工具文件例如：event.js 等</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/22/Js/js细节知识点/" class="archive-article-date">
-  	<time datetime="2018-05-22T01:29:19.373Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/22/Js/js细节知识点/">js细节知识点</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
-          
-
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://hotao.io.com/2018/08/24/小程序/Page/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/18/Js/正则/" class="archive-article-date">
-  	<time datetime="2018-05-18T02:16:35.891Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-18</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/06/FullStackDeveloper/index/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">node + koa + mysql + vue做一个公司内部需求网站</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/18/Js/正则/">这次一定要把正则安排的明明白白</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/15/Js/优化代码速度的一点小操作/" class="archive-article-date">
-  	<time datetime="2018-05-15T05:54:53.823Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/15/Js/优化代码速度的一点小操作/">优化代码速度的一点小操作</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/15/Js/奇技淫巧/" class="archive-article-date">
-  	<time datetime="2018-05-15T02:52:17.886Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/15/Js/奇技淫巧/">js的奇技淫巧,一些提高代码逼格的操作（谁也别想动我的代码）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -338,9 +351,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,

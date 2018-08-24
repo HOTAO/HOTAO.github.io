@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="HOTAO">
 <meta property="og:description" content="如何判断一个对象是不是数组类型一般我们判断类型，很顺利的就会联想到 typeof，但是数组类型和对象类型在 typeof 的时候，返回的都是 “object” 12console.log(typeof &amp;#123;&amp;#125;) // 返回字符串&quot;object&quot;console.log(typeof []) // 返回字符串&quot;object &quot; 那么该怎么判断一个对象是不是数组类型呢？ 1、从原型入手">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2018-07-12T03:35:21.111Z">
+<meta property="og:updated_time" content="2018-08-23T02:14:32.853Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js细节知识点">
 <meta name="twitter:description" content="如何判断一个对象是不是数组类型一般我们判断类型，很顺利的就会联想到 typeof，但是数组类型和对象类型在 typeof 的时候，返回的都是 “object” 12console.log(typeof &amp;#123;&amp;#125;) // 返回字符串&quot;object&quot;console.log(typeof []) // 返回字符串&quot;object &quot; 那么该怎么判断一个对象是不是数组类型呢？ 1、从原型入手">
@@ -169,13 +169,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="如何判断一个对象是不是数组类型"><a href="#如何判断一个对象是不是数组类型" class="headerlink" title="如何判断一个对象是不是数组类型"></a>如何判断一个对象是不是数组类型</h4><p>一般我们判断类型，很顺利的就会联想到 <code>typeof</code>，但是数组类型和对象类型在 <code>typeof</code> 的时候，返回的都是 <code>“object”</code></p>
+        <h1 id="如何判断一个对象是不是数组类型"><a href="#如何判断一个对象是不是数组类型" class="headerlink" title="如何判断一个对象是不是数组类型"></a>如何判断一个对象是不是数组类型</h1><p>一般我们判断类型，很顺利的就会联想到 <code>typeof</code>，但是数组类型和对象类型在 <code>typeof</code> 的时候，返回的都是 <code>“object”</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> &#123;&#125;) <span class="comment">// 返回字符串"object"</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> []) <span class="comment">// 返回字符串"object "</span></span><br></pre></td></tr></table></figure>
 <p>那么该怎么判断一个对象是不是数组类型呢？</p>
-<h5 id="1、从原型入手，Array-prototype-isPrototypeOf-obj"><a href="#1、从原型入手，Array-prototype-isPrototypeOf-obj" class="headerlink" title="1、从原型入手，Array.prototype.isPrototypeOf(obj);"></a>1、从原型入手，Array.prototype.isPrototypeOf(obj);</h5><p><code>isPrototypeOf()</code>函数用于指示对象是否存在于另一个对象的原型链中。如果存在，返回<code>true</code>，否则返回<code>false</code></p>
+<h2 id="1、从原型入手，Array-prototype-isPrototypeOf-obj"><a href="#1、从原型入手，Array-prototype-isPrototypeOf-obj" class="headerlink" title="1、从原型入手，Array.prototype.isPrototypeOf(obj);"></a>1、从原型入手，Array.prototype.isPrototypeOf(obj);</h2><p><code>isPrototypeOf()</code>函数用于指示对象是否存在于另一个对象的原型链中。如果存在，返回<code>true</code>，否则返回<code>false</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.isPrototypeOf([]) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.isPrototypeOf(&#123;&#125;) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-<h5 id="2、也可以从构造函数入手，object-instanceof-constructor"><a href="#2、也可以从构造函数入手，object-instanceof-constructor" class="headerlink" title="2、也可以从构造函数入手，object instanceof constructor"></a>2、也可以从构造函数入手，object instanceof constructor</h5><p><code>instanceof</code> 运算符用来检测 <code>constructor.prototype</code>是否存在于参数 <code>object</code> 的原型链上。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[] <span class="keyword">instanceof</span> <span class="built_in">Array</span> <span class="comment">// true  因为Object.getPrototypeOf([]) === Array.prototype</span></span><br></pre></td></tr></table></figure>
+<h2 id="2、也可以从构造函数入手，object-instanceof-constructor"><a href="#2、也可以从构造函数入手，object-instanceof-constructor" class="headerlink" title="2、也可以从构造函数入手，object instanceof constructor"></a>2、也可以从构造函数入手，object instanceof constructor</h2><p><code>instanceof</code> 运算符用来检测 <code>constructor.prototype</code>是否存在于参数 <code>object</code> 的原型链上。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;[] <span class="keyword">instanceof</span> <span class="built_in">Array</span> <span class="comment">// true  因为Object.getPrototypeOf([]) === Array.prototype</span></span><br></pre></td></tr></table></figure>
+<h1 id="如何判断两个对象的内容相同"><a href="#如何判断两个对象的内容相同" class="headerlink" title="如何判断两个对象的内容相同"></a>如何判断两个对象的内容相同</h1><p>利用 <code>Object.is()</code></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/is" target="_blank" rel="noopener">Object.is()</a> 判断两个值是否相同。如果下列任何一项成立，则两个值相同：</p>
+<p>两个值都是 undefined<br>两个值都是 null<br>两个值都是 true 或者都是 false<br>两个值是由相同个数的字符按照相同的顺序组成的字符串<br>两个值指向同一个对象<br>两个值都是数字并且<br>都是正零 +0<br>都是负零 -0<br>都是 NaN<br>都是除零和 NaN 外的其它同一个数字<br>这种相等性判断逻辑和传统的 == 运算符所用的不同，== 运算符会对它两边的操作数做隐式类型转换（如果它们类型不同），然后才进行相等性比较，（所以才会有类似 “” == false 为 true 的现象），但 Object.is 不会做这种类型转换。</p>
+<p>这与===运算符也不一样。===运算符（和==运算符）将数字值-0 和+0 视为相等，并认为 Number.NaN 不等于 NaN。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = &#123; <span class="attr">a</span>: <span class="string">'a'</span>, <span class="attr">b</span>: <span class="string">'b'</span> &#125;</span><br><span class="line"><span class="keyword">const</span> a1 = &#123; <span class="attr">a</span>: <span class="string">'a'</span>, <span class="attr">b</span>: <span class="string">'b'</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.is(a, a1) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Object</span>.is(<span class="built_in">JSON</span>.stringify(a), <span class="built_in">JSON</span>.stringify(a1)) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>纯对象，无法直接比较是否想得。可以借用<code>JSON.stringify</code>先把对象转换成字符串，然后在比较。</p>
 
       
 
@@ -413,11 +419,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color3">全栈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">全栈</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -429,11 +435,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">快应用</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color4">快应用</a>
               </li>
             
             <div class="clearfix"></div>

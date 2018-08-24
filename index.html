@@ -150,6 +150,99 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-小程序/Page" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="小程序页面栈"><a href="#小程序页面栈" class="headerlink" title="小程序页面栈"></a>小程序页面栈</h1><p>目前的版本，页面栈最多可容纳 10 个页面。每个页面在栈内都是一个 page 对象。<font color="red"> 拿到这个对象，便可以对操作该页面的方法以及属性。</font></p>
+<table>
+<thead>
+<tr>
+<th>路由方法</th>
+<th style="text-align:center">页面栈结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始化</td>
+<td style="text-align:center">新页面入栈</td>
+</tr>
+<tr>
+<td>打开新页面（wx.nacigateTo()）</td>
+<td style="text-align:center">新页面入栈</td>
+</tr>
+<tr>
+<td>页面重定向（wx.redirectTo()）</td>
+<td style="text-align:center">当前页面出栈，新页面入栈</td>
+</tr>
+<tr>
+<td>页面返回（wx.navigateBack）</td>
+<td style="text-align:center">页面不断出栈，直至目标返回页</td>
+</tr>
+<tr>
+<td>Tab 切换</td>
+<td style="text-align:center">页面全部出栈，tab 页面入栈</td>
+</tr>
+<tr>
+<td>重加载</td>
+<td style="text-align:center">页面全部出栈，重加载页面入栈</td>
+</tr>
+</tbody>
+</table>
+<h2 id="如何获取页面栈内的-Page-对象"><a href="#如何获取页面栈内的-Page-对象" class="headerlink" title="如何获取页面栈内的 Page 对象"></a>如何获取页面栈内的 Page 对象</h2><p>通过 getCurrentPages()获取栈内所有对象，根据下标获取想要的 page 对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pages = getCurrentPages() <span class="comment">// 得到栈内所有对线，返回值是数组</span></span><br></pre></td></tr></table></figure>
+<h2 id="实用场景"><a href="#实用场景" class="headerlink" title="实用场景"></a>实用场景</h2><p>现在有个需求是这样的：</p>
+<p>当前是一个用户信息的编辑页面(A)，有一项是学校的填写。填写的方式是点击学校的输入框，打开一个新的页面（B），在新页面里通过 输入关键字搜索选择学校或者根据当前的位置选择附近的学校，然后把选择的学校告诉页面 A。</p>
+<p>上面的需求就是 A 页面 跳转到 B 页面，在 B 页面进行操作后，返回 A 页面并带回操作结果</p>
+<p>代码流程</p>
+<p>1、A 调用<code>wx.navigateTo()</code>，跳转到 B 页面</p>
+<p>2、B 页面从栈里面取出 A 页面的 Page 对象，并做赋值操作：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pages = getCurrentPages() <span class="comment">// 得到栈内所有对线，返回值是数组</span></span><br><span class="line"><span class="keyword">const</span> currPage = pages[pages.length - <span class="number">1</span>] <span class="comment">// 当前页面（即B页面）的page对象</span></span><br><span class="line"><span class="keyword">const</span> prevPage = pages[page.length - <span class="number">2</span>] <span class="comment">// 父级页面（即A页面）的page对象</span></span><br><span class="line"></span><br><span class="line">prevPage.setDate(&#123;</span><br><span class="line">  school: <span class="string">'北京大学'</span> <span class="comment">// 直接用setDate()给A页面赋值</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>3、调用<code>wx.navigateBack()</code>，回到上一个页面（即 A 页面）</p>
+<p>这样其实也是实现了页面间的通讯。相比起要用 eventBus 这类的方法来说，更加方便使用，而且也不需要添加新的工具文件例如：event.js 等</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/24/小程序/Page/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-FullStackDeveloper/index" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -329,13 +422,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="如何判断一个对象是不是数组类型"><a href="#如何判断一个对象是不是数组类型" class="headerlink" title="如何判断一个对象是不是数组类型"></a>如何判断一个对象是不是数组类型</h4><p>一般我们判断类型，很顺利的就会联想到 <code>typeof</code>，但是数组类型和对象类型在 <code>typeof</code> 的时候，返回的都是 <code>“object”</code></p>
+        <h1 id="如何判断一个对象是不是数组类型"><a href="#如何判断一个对象是不是数组类型" class="headerlink" title="如何判断一个对象是不是数组类型"></a>如何判断一个对象是不是数组类型</h1><p>一般我们判断类型，很顺利的就会联想到 <code>typeof</code>，但是数组类型和对象类型在 <code>typeof</code> 的时候，返回的都是 <code>“object”</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> &#123;&#125;) <span class="comment">// 返回字符串"object"</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> []) <span class="comment">// 返回字符串"object "</span></span><br></pre></td></tr></table></figure>
 <p>那么该怎么判断一个对象是不是数组类型呢？</p>
-<h5 id="1、从原型入手，Array-prototype-isPrototypeOf-obj"><a href="#1、从原型入手，Array-prototype-isPrototypeOf-obj" class="headerlink" title="1、从原型入手，Array.prototype.isPrototypeOf(obj);"></a>1、从原型入手，Array.prototype.isPrototypeOf(obj);</h5><p><code>isPrototypeOf()</code>函数用于指示对象是否存在于另一个对象的原型链中。如果存在，返回<code>true</code>，否则返回<code>false</code></p>
+<h2 id="1、从原型入手，Array-prototype-isPrototypeOf-obj"><a href="#1、从原型入手，Array-prototype-isPrototypeOf-obj" class="headerlink" title="1、从原型入手，Array.prototype.isPrototypeOf(obj);"></a>1、从原型入手，Array.prototype.isPrototypeOf(obj);</h2><p><code>isPrototypeOf()</code>函数用于指示对象是否存在于另一个对象的原型链中。如果存在，返回<code>true</code>，否则返回<code>false</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.isPrototypeOf([]) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.isPrototypeOf(&#123;&#125;) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-<h5 id="2、也可以从构造函数入手，object-instanceof-constructor"><a href="#2、也可以从构造函数入手，object-instanceof-constructor" class="headerlink" title="2、也可以从构造函数入手，object instanceof constructor"></a>2、也可以从构造函数入手，object instanceof constructor</h5><p><code>instanceof</code> 运算符用来检测 <code>constructor.prototype</code>是否存在于参数 <code>object</code> 的原型链上。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[] <span class="keyword">instanceof</span> <span class="built_in">Array</span> <span class="comment">// true  因为Object.getPrototypeOf([]) === Array.prototype</span></span><br></pre></td></tr></table></figure>
+<h2 id="2、也可以从构造函数入手，object-instanceof-constructor"><a href="#2、也可以从构造函数入手，object-instanceof-constructor" class="headerlink" title="2、也可以从构造函数入手，object instanceof constructor"></a>2、也可以从构造函数入手，object instanceof constructor</h2><p><code>instanceof</code> 运算符用来检测 <code>constructor.prototype</code>是否存在于参数 <code>object</code> 的原型链上。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;[] <span class="keyword">instanceof</span> <span class="built_in">Array</span> <span class="comment">// true  因为Object.getPrototypeOf([]) === Array.prototype</span></span><br></pre></td></tr></table></figure>
+<h1 id="如何判断两个对象的内容相同"><a href="#如何判断两个对象的内容相同" class="headerlink" title="如何判断两个对象的内容相同"></a>如何判断两个对象的内容相同</h1><p>利用 <code>Object.is()</code></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/is" target="_blank" rel="noopener">Object.is()</a> 判断两个值是否相同。如果下列任何一项成立，则两个值相同：</p>
+<p>两个值都是 undefined<br>两个值都是 null<br>两个值都是 true 或者都是 false<br>两个值是由相同个数的字符按照相同的顺序组成的字符串<br>两个值指向同一个对象<br>两个值都是数字并且<br>都是正零 +0<br>都是负零 -0<br>都是 NaN<br>都是除零和 NaN 外的其它同一个数字<br>这种相等性判断逻辑和传统的 == 运算符所用的不同，== 运算符会对它两边的操作数做隐式类型转换（如果它们类型不同），然后才进行相等性比较，（所以才会有类似 “” == false 为 true 的现象），但 Object.is 不会做这种类型转换。</p>
+<p>这与===运算符也不一样。===运算符（和==运算符）将数字值-0 和+0 视为相等，并认为 Number.NaN 不等于 NaN。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = &#123; <span class="attr">a</span>: <span class="string">'a'</span>, <span class="attr">b</span>: <span class="string">'b'</span> &#125;</span><br><span class="line"><span class="keyword">const</span> a1 = &#123; <span class="attr">a</span>: <span class="string">'a'</span>, <span class="attr">b</span>: <span class="string">'b'</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.is(a, a1) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Object</span>.is(<span class="built_in">JSON</span>.stringify(a), <span class="built_in">JSON</span>.stringify(a1)) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>纯对象，无法直接比较是否想得。可以借用<code>JSON.stringify</code>先把对象转换成字符串，然后在比较。</p>
 
       
 
@@ -845,84 +944,6 @@
 
 
   
-    <article id="post-quickApp/followMe2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/12/quickApp/followMe2/">快应用之手摸手，跟我走（2）</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/12/quickApp/followMe2/" class="archive-article-date">
-  	<time datetime="2018-04-12T08:24:31.262Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="gankQuick-快应用（妹子篇）"><a href="#gankQuick-快应用（妹子篇）" class="headerlink" title="gankQuick-快应用（妹子篇）"></a>gankQuick-快应用（妹子篇）</h2><p><a href="https://doc.quickapp.cn/" target="_blank" rel="noopener">快应用官方文档</a></p>
-<p>感谢 gank.io 提供的 api</p>
-<p>大家好。上一篇文章我们做了个妹子的页面<a href="https://juejin.im/post/5abb6732f265da23a2292a96" target="_blank" rel="noopener">(传送门)</a><br>
-        
-          <a class="article-more-a" href="/2018/04/12/quickApp/followMe2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">快应用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/12/quickApp/followMe2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1016,11 +1037,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color3">全栈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">全栈</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1032,11 +1053,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">快应用</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color4">快应用</a>
               </li>
             
             <div class="clearfix"></div>
